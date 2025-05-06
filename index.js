@@ -1,18 +1,20 @@
-// Please don't change the pre-written code
-// Import the necessary modules here
+// Please do not change the prewritten code
+const axios = require('axios');
 
-// Write your code here
-const http = require('http');
-const fs = require('fs');
-// Write your code here
-const port = 8080;
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    // res.setHeader('Content-Type', 'text/plain');
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    const data = fs.readFileSync('index.html').toString();
-    res.end(data);
-});
 
-server.listen(port);
-module.exports = server;
+const Solution = async () => {
+  // Write your code here
+  try {
+    const response = await axios.get('https://api.codingninjas.com/api/v3/event_tags');
+    
+    // iii) Retrieve response data
+    const data = response.data;
+
+    // iv) Print the response to console
+    console.log('Event Tags:', data);
+  } catch (error) {
+    console.error('Error fetching data:', error.message);
+  }
+};
+Solution();
+module.exports = Solution;

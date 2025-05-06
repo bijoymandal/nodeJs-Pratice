@@ -1,20 +1,22 @@
-// Please do not change the prewritten code
-const axios = require('axios');
-
-
-const Solution = async () => {
+// Import required module
+const readline = require('readline');
+const Solution = () => {
   // Write your code here
-  try {
-    const response = await axios.get('https://api.codingninjas.com/api/v3/event_tags');
-    
-    // iii) Retrieve response data
-    const data = response.data;
+  const qInterface = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
 
-    // iv) Print the response to console
-    console.log('Event Tags:', data);
-  } catch (error) {
-    console.error('Error fetching data:', error.message);
-  }
+  qInterface.question('Enter the first number: ', (input1) => {
+    const num1 = Number(input1);
+    qInterface.question('Enter the second number: ', (input2) => {
+        const num2 = Number(input2);
+        const max = Math.max(num1, num2);
+        console.log(`The maximum value is: ${max}`);
+        qInterface.close();
+    });
+  });
 };
+
 Solution();
 module.exports = Solution;

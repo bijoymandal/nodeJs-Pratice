@@ -1,8 +1,14 @@
-// Import required module
+const http = require("http");
 
-const Solution = () => {
-  // Write your code here
-};
+// const localhost = "http://localhost";
+const port =3000;
+const server = http.createServer((req, res) => {
+  const resMessage = "I am a Ninja";
+  res.end(resMessage);
+});
 
-Solution();
-module.exports = Solution;
+server.listen(port, () => {
+  console.log(`server is listening at port ${port}`);
+});
+
+module.exports = server;

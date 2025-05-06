@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
@@ -19,8 +19,8 @@
     "jest-json-reporter": "^1.2.2",
     "supertest": "^6.3.3",
     "axios": "^1.6.2",
-      "archiver": "^6.0.1",
-      "form-data": "^4.0.0",
-      "glob": "^10.3.10"
+    "archiver": "^6.0.1",
+    "form-data": "^4.0.0",
+    "glob": "^10.3.10"
   }
 }

@@ -1,20 +1,14 @@
-//Apply the correct asynchronous approach to ensure the read operation executes only after the write operation is completed.
+const http = require("http");
 
-const fs = require("fs");
+// const localhost = "http://localhost";
+const port =3000;
+const server = http.createServer((req, res) => {
+  const resMessage = "I am a Ninja";
+  res.end(resMessage);
+});
 
-const Solution = () => {
-  
-  fs.appendFile("note.txt", " new data", (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("file updated succesfully!");
-      fs.readFile("note.txt", "utf-8", (data, err) => {
-        if (err) console.log(err);
-        else console.log(data);
-      });
-    }
-  });
-}
-Solution();
-module.exports = Solution;
+server.listen(port, () => {
+  console.log(`server is listening at port ${port}`);
+});
+
+module.exports = server;

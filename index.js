@@ -1,14 +1,18 @@
-const http = require("http");
+// Please don't change the pre-written code
+// Import the necessary modules here
 
-// const localhost = "http://localhost";
-const port =3000;
+// Write your code here
+const http = require('http');
+const fs = require('fs');
+// Write your code here
+const port = 8080;
 const server = http.createServer((req, res) => {
-  const resMessage = "I am a Ninja";
-  res.end(resMessage);
+    res.statusCode = 200;
+    // res.setHeader('Content-Type', 'text/plain');
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    const data = fs.readFileSync('index.html').toString();
+    res.end(data);
 });
 
-server.listen(port, () => {
-  console.log(`server is listening at port ${port}`);
-});
-
+server.listen(port);
 module.exports = server;

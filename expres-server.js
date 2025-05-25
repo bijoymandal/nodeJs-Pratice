@@ -14,7 +14,13 @@ function secondMiddleware(req, res, next) {
     next(); // call next middleware
 }
 
-server.get('/',[firstMiddleware,secondMiddleware],(req, res) => {
+function globalMiddleware(req, res, next) {
+    console.log('this is global middleware');
+    next(); // call next middleware
+}
+server.use(globalMiddleware); // apply global middleware
+
+server.get('/send',[firstMiddleware,secondMiddleware],(req, res) => {
     res.send('Welcome to express Server in running mode');                                                                                                                                                                                                                                                                                                                                                                                                                                                
 });
 

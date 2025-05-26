@@ -23,6 +23,20 @@ server.use(globalMiddleware); // apply global middleware
 server.get('/send',[firstMiddleware,secondMiddleware],(req, res) => {
     res.send('Welcome to express Server in running mode');                                                                                                                                                                                                                                                                                                                                                                                                                                                
 });
+const setCustomHeader = (res,headerName,headerValue) => {
+  // Write your code here
+  res.setHeader(headerName, headerValue);
+  console.log(`${headerName} with value ${headerValue} has been set successfully.`);
+};
+
+
+
+server.get("/", (req, res) => {
+    setCustomHeader(res, "Content-Type", "application/json");
+   return  res.send(`get method called!`);
+});
+// only access html in public folder static files
+server.use(express.static('public'));
 
 //Listen on specified port
 server.listen(3000, () => {

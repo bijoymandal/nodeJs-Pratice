@@ -1,0 +1,14 @@
+import path from 'path';
+import ProductModal from '../models/product.modal.js';
+
+
+
+export default class ProductController {
+    getProducts(req, res) {
+        let products = ProductModal.getProduct();
+        console.log(products);
+        console.log(path.resolve());
+        // return res.sendFile(path.join(path.resolve(), 'src', 'views', 'products.html'));
+        res.render("products",{products:products})
+    }
+}

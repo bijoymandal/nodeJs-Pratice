@@ -1,6 +1,6 @@
 const http = require('http');
 const server = http.createServer((req,res)=>{
-    res.write("This is comming from Node JS");
+    res.write("This is Comeing from Node JS");
     console.log(req.url);
     if(req.url =='/first')
     {

@@ -9,6 +9,6 @@ export default class ProductController {
         console.log(products);
         console.log(path.resolve());
         // return res.sendFile(path.join(path.resolve(), 'src', 'views', 'products.html'));
-        res.render("products",{products:products})
+        res.render("pages/products",{title:'Product list',products:products})
     }
 }

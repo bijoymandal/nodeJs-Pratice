@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><%= title %></title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen p-6">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      <%= typeof title !== 'undefined' ? title : 'My Node Js App' %>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen p-6">
     <%- include('../partials/header')%>
 
     <!-- Placeholder for rendering other ejs views-->
-     <main>
-    <%-body%>
-    </main>
+    <main><%-body%></main>
 
     <%- include('../partials/footer')%>
-</body>
+  </body>
 </html>

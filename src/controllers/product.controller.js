@@ -22,6 +22,10 @@ export default class ProductController {
     }
     storeAddFrom(req,res){
         console.log(req.body);
+        ProductModal.add(req.body);
+        // all Products get
+        let products =  ProductModal.getProduct();
+        return res.render("products",{products});
         //res.redirect('/product');
     }
 }

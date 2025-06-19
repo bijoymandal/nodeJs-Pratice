@@ -10,7 +10,11 @@ export default class ProductModal{
     static getProduct(){
         return products;
     }
-
+    static add(productObj)
+    {
+        let newProduct = new ProductModal(products.length+1,productObj.name,productObj.desc,productObj.price,productObj.imageUrl);
+        products.push(newProduct);
+    }
 }
 
 var products = [

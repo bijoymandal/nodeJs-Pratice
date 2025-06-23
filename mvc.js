@@ -3,6 +3,7 @@ import ProductController from './src/controllers/product.controller.js';
 import ejsLayouts from 'express-ejs-layouts';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import validationMiddleware from './src/middleware/validation.middleware.js';
 
 // Fix __dirname in ES Module
 const __filename = fileURLToPath(import.meta.url);
@@ -31,7 +32,7 @@ server.get('/product',productController.getProducts);
 //Add New Product
 server.get('/product/new-product',productController.getAddForm);
 //store New Product
-server.post('/product/add',productController.storeAddFrom);
+server.post('/product/add',validationMiddleware,productController.storeAddFrom);
 
 
 

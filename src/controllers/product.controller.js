@@ -28,7 +28,42 @@ export default class ProductController {
         ProductModal.add(req.body);
         // all Products get
         let products =  ProductModal.getProduct();
-        return res.render("products",{products}); 
+        return res.render("pages/products",{products}); 
         //res.redirect('/product');
+    }
+    getUpdateProductView(req, res,next) {
+        //1. if product exists then return view
+        const id = req.params.title;
+        const productFound = ProductModal.getById(id);
+        if(productFound){
+            return res.render("pages/update-product",
+                {
+                    layout:'layouts/main',
+                    title:'Update Product',
+                    subTitle:'Update Product',
+                    errorMessage: null,
+                    productData: productFound
+                });
+        }
+        else{
+            res.status(401).send("Product not found");
+            next(); 
+        }//if not found then go to next middleware           
+        //2.else return errors
+    }
+    updateProduct(req,res){
+        ProductModal.update(req.body);
+        var products = ProductModal.getProduct();
+        return res.render("pages/products",{products});
+    }
+    deleteProduct(req,res){
+        const id = req.params.title;
+        const productFound = ProductModal.getById(id);
+        if(!productFound){
+           return res.status(401).send("Product not found");
+        }
+        ProductModal.delete(id);
+        var products = ProductModal.getProduct();
+        return res.render("pages/products",{products});
     }
 }

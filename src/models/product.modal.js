@@ -15,6 +15,18 @@ export default class ProductModal{
         let newProduct = new ProductModal(products.length+1,productObj.name,productObj.desc,productObj.price,productObj.imageUrl);
         products.push(newProduct);
     }
+    static getById(id){
+        return products.find((product) => product._id === id);
+    }
+    static update(productObj){
+        let productFound = products.findIndex((product) => product._id === productObj._id);
+        return products[productFound]=productObj;
+    }
+    static delete(title){
+        const index = products.findIndex((product) => product._id === title); 
+        products.splice(index, 1);
+       
+    }
 }
 
 var products = [

@@ -33,7 +33,10 @@ server.get('/product',productController.getProducts);
 server.get('/product/new-product',productController.getAddForm);
 //store New Product
 server.post('/product/add',validationMiddleware,productController.storeAddFrom);
-
+//fetch Update Product View
+server.get('/product/update-product/:title',productController.getUpdateProductView);
+//delete Product
+server.get('/product/delete-product/:title',productController.deleteProduct);
 
 
 server.listen(3400,()=>{

@@ -31,8 +31,11 @@ export default class ProductModal{
 
 var products = [
 
-    new ProductModal("1","Product 1",100,"Description for product 1","https://picsum.photos/200/300",'active'),
-    new ProductModal("2","Product 2",200,"Description for product 2","https://picsum.photos/200/300","InActive"),
-    new ProductModal("3","Product 3",300,"Description for product 3","https://picsum.photos/200/300","active"),
-    new ProductModal("4","Product 4",400,"Description for product 4","https://picsum.photos/200/300","active"),
+    new ProductModal("1","Apple",100,"Description for product 1","https://picsum.photos/200/300",'active'),
+    new ProductModal("2","Samsung",200,"Description for product 2","https://picsum.photos/200/300","InActive"),
+    new ProductModal("3","Banana",300,"Description for product 3","https://picsum.photos/200/300","active"),
+    new ProductModal("4","Water",400,"Description for product 4","https://picsum.photos/200/300","active"),
+    new ProductModal("5","Bag",400,"Description for product 4","https://picsum.photos/200/300","active"),
+    new ProductModal("6","Sister",460,"Description for product 4","https://picsum.photos/200/300","active"),
+    new ProductModal("7","Router",4200,"Description for product 4","https://picsum.photos/200/300","active"),
 ];

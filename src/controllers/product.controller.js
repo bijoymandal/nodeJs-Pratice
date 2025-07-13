@@ -6,11 +6,25 @@ import ProductModal from '../models/product.modal.js';
 export default class ProductController {
     getProducts(req, res) {
         let products = ProductModal.getProduct();
-        console.log(products);
-        console.log(path.resolve());
         // return res .sendFile(path.join(path.resolve(), 'src', 'views', 'products.html'));
-        res.render("pages/products",{title:'Product list',products:products})
+        res.render("pages/products",{title:'Product list',product:products})
     }
+    searchProducts(req, res) {
+        const query = req.body.name?.trim().toLowerCase() || '';
+        const products = ProductModal.getProduct();
+        const filteredProducts = query
+            ? products.filter(product => 
+                product._name.toLowerCase().includes(query)||
+                product._price.toString().includes(query)
+            )
+            : products;
+        res.render('partials/productRow', { product: filteredProducts, layout: false });
+
+  
+    }
+
+
+
     getAddForm(req,res)
     {
         return res.render("pages/new-product",
@@ -56,14 +70,17 @@ export default class ProductController {
         var products = ProductModal.getProduct();
         return res.render("pages/products",{products});
     }
-    deleteProduct(req,res){
-        const id = req.params.title;
-        const productFound = ProductModal.getById(id);
-        if(!productFound){
-           return res.status(401).send("Product not found");
-        }
-        ProductModal.delete(id);
-        var products = ProductModal.getProduct();
-        return res.render("pages/products",{products});
-    }
+    deleteProduct(req, res) {
+  const id = req.params.id;
+  const productFound = ProductModal.getById(id);
+
+  if (!productFound) {
+    return res.status(404).json({ success: false, message: "Product not found" });
+  }
+
+  ProductModal.delete(id);
+
+  return res.json({ success: true });
+}
+
 }

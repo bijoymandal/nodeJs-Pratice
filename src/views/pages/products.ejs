@@ -1,16 +1,49 @@
 <div class="max-w-6xl mx-auto bg-white p-6 rounded shadow">
   <h1 class="text-2xl font-semibold text-gray-800 mb-4">Product List</h1>
 
-  <div class="overflow-x-auto">
-    <div class="flex justify-end mb-4">
-      <a
-        href="/product/new-product"
-        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-      >
-        + Add New Product
-      </a>
+  <!-- Search Bar + Reload Icon -->
+  <div class="flex items-center justify-between mb-4">
+    <div class="relative w-full max-w-md">
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search by name..."
+        class="w-full border border-gray-300 rounded pl-4 pr-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <div id="spinner" class="absolute right-3 top-2.5 hidden">
+        <svg
+          class="animate-spin h-5 w-5 text-blue-600"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
+      </div>
     </div>
 
+    <a
+      href="/product/new-product"
+      class="ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+    >
+      + Add New Product
+    </a>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
     <table
       class="min-w-full border border-gray-300 divide-y divide-gray-200 text-sm text-left"
     >
@@ -19,16 +52,112 @@
           <th class="px-4 py-2 font-medium">#</th>
           <th class="px-4 py-2 font-medium">Image</th>
           <th class="px-4 py-2 font-medium">Name</th>
-          <th class="px-4 py-2 font-medium">Email</th>
           <th class="px-4 py-2 font-medium">Price</th>
           <th class="px-4 py-2 font-medium">Status</th>
           <th class="px-4 py-2 font-medium">Actions</th>
         </tr>
       </thead>
-      <tbody class="bg-white divide-y divide-gray-100">
-        <% products.forEach(product=>{ %>
-        <%-include('../partials/productRow',{product})%> <% }) %>
+      <tbody id="productTableBody" class="bg-white divide-y divide-gray-100">
+        <%- include('../partials/productRow', { product:product }) %>
       </tbody>
     </table>
   </div>
+  <!-- Delete Confirmation Modal -->
+  <div
+    id="deleteModal"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden"
+  >
+    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Are you sure?</h2>
+      <p class="mb-6 text-sm text-gray-600">
+        Do you really want to delete this product?
+      </p>
+      <div class="flex justify-end space-x-2">
+        <button
+          onclick="closeModal()"
+          class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-sm"
+        >
+          Cancel
+        </button>
+        <button
+          id="confirmDeleteBtn"
+          class="px-4 py-2 rounded bg-red-600 hover:bg-red-700 text-white text-sm"
+        >
+          Yes, Delete
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  const input = document.getElementById("searchInput");
+  const spinner = document.getElementById("spinner");
+  const tableBody = document.getElementById("productTableBody");
+
+  let timeout = null;
+
+  input.addEventListener("input", function () {
+    clearTimeout(timeout);
+    spinner.classList.remove("hidden");
+
+    timeout = setTimeout(() => {
+      const query = this.value.trim();
+
+      fetch("/product/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: query }),
+      })
+        .then((res) => res.text())
+        .then((html) => {
+          tableBody.innerHTML = html;
+          if (!html.trim()) {
+            tableBody.innerHTML =
+              '<tr><td colspan="7" class="text-center py-4 text-gray-500">No products found</td></tr>';
+          }
+        })
+        .catch(() => {
+          tableBody.innerHTML =
+            '<tr><td colspan="7" class="text-center text-red-500 py-4">Error</td></tr>';
+        })
+        .finally(() => {
+          spinner.classList.add("hidden");
+        });
+    }, 400);
+  });
+  let deleteId = null;
+
+  function confirmDelete(id) {
+    deleteId = id;
+    document.getElementById("deleteModal").classList.remove("hidden");
+  }
+
+  function closeModal() {
+    deleteId = null;
+    document.getElementById("deleteModal").classList.add("hidden");
+  }
+  document.getElementById("confirmDeleteBtn").addEventListener("click", () => {
+    if (!deleteId) return;
+
+    fetch(`/product/delete-product/${deleteId}`, {
+      method: "GET", // or DELETE if your route supports it
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          // Remove the row
+          const row = document.querySelector(`tr[data-id='${deleteId}']`);
+          if (row) row.remove();
+        } else {
+          alert("Failed to delete");
+        }
+      })
+      .catch(() => alert("Error deleting product"))
+      .finally(() => {
+        closeModal();
+      });
+  });
+</script>

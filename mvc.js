@@ -10,35 +10,38 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const server = express();
-//middleware to parse urlencoded data
-server.use(express.urlencoded({extended:true}));
-// server.use(express.static('src/views'));
 
+// Middleware
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
-//server view engine setup
+// Serve static files (like CSS, JS, images)
+server.use(express.static(path.join(__dirname, 'src', 'public'))); // store assets in src/public
+
+// View engine setup
 server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname, 'src', 'views'));
-//use layouts Middleware in ejs Layouts
+
+// EJS Layouts
 server.use(ejsLayouts);
-server.set('layout','layouts/main');
-server.use(express.json());
-server.use(express.static(path.join(__dirname, 'src', 'views')));
+server.set('layout', 'layouts/main');
 
-//create an instance of productController
+// Instantiate ProductController
 const productController = new ProductController();
-server.get('/');
-//get All Products
-server.get('/product',productController.getProducts);
-//Add New Product
-server.get('/product/new-product',productController.getAddForm);
-//store New Product
-server.post('/product/add',validationMiddleware,productController.storeAddFrom);
-//fetch Update Product View
-server.get('/product/update-product/:title',productController.getUpdateProductView);
-//delete Product
-server.get('/product/delete-product/:title',productController.deleteProduct);
 
+// Routes
+server.get('/', (req, res) => {
+  res.redirect('/product'); // Redirect root to product list
+});
 
-server.listen(3400,()=>{
-    console.log('server is running port',3400);
+server.get('/product', productController.getProducts);
+server.post('/product/search', productController.searchProducts);
+server.get('/product/new-product', productController.getAddForm);
+server.post('/product/add', validationMiddleware, productController.storeAddFrom);
+server.get('/product/update-product/:title', productController.getUpdateProductView);
+server.get('/product/delete-product/:id', productController.deleteProduct);
+
+// Start server
+server.listen(3400, () => {
+  console.log('Server is running on http://localhost:3400');
 });

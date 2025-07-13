@@ -8,11 +8,13 @@
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-100 min-h-screen p-6">
+  <body class="bg-gray-100 min-h-screen p-6 flex flex-col">
     <%- include('../partials/header')%>
-
+    <div class="flex flex-1">
+      <%- include('../partials/sidebar') %>
+      <main class="flex-1 p-6 bg-white"><%-body%></main>
+    </div>
     <!-- Placeholder for rendering other ejs views-->
-    <main><%-body%></main>
 
     <%- include('../partials/footer')%>
   </body>

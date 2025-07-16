@@ -4,6 +4,7 @@ import ejsLayouts from 'express-ejs-layouts';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import validationMiddleware from './src/middleware/validation.middleware.js';
+import { uploadFile } from './src/middleware/file-upload.middleware.js';
 
 // Fix __dirname in ES Module
 const __filename = fileURLToPath(import.meta.url);
@@ -37,7 +38,7 @@ server.get('/', (req, res) => {
 server.get('/product', productController.getProducts);
 server.post('/product/search', productController.searchProducts);
 server.get('/product/new-product', productController.getAddForm);
-server.post('/product/add', validationMiddleware, productController.storeAddFrom);
+server.post('/product/add', validationMiddleware,uploadFile, productController.storeAddFrom);
 server.get('/product/update-product/:title', productController.getUpdateProductView);
 server.get('/product/delete-product/:id', productController.deleteProduct);
 

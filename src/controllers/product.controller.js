@@ -1,5 +1,5 @@
 import path from "path";
-import ProductModal from "../models/product.modal.js";
+import ProductModal from "../models/product.model.js";
 
 export default class ProductController {
   getProducts(req, res) {

@@ -1,10 +1,11 @@
 <% if (product.length > 0) { %> <% product.forEach((p,index) => { %>
 <tr data-id="<%= p._id %>">
-  <td><%= index + 1 %></td></td>
+  <td class="text-center"><%= index + 1 %></td></td>
   <td>
     <img src="<%= p._imageUrl %>" class="w-10 h-10 rounded-full" />
   </td>
   <td><%= p._name %></td>
+  <td><%=p._desc %></td>
   <td><%= p._price %></td>
   <td>
     <% if (p.status === 'active') { %>

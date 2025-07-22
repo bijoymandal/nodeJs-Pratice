@@ -1,6 +1,21 @@
-<aside class="w-64 bg-gray-100 p-4">
+<!-- <aside class="w-64 bg-gray-100 p-4">
   <ul>
     <li><a href="/dashboard">Dashboard</a></li>
     <li><a href="/product">Products</a></li>
+    <li><a href="/user">Users</a></li>
+  </ul>
+</aside> -->
+
+<aside class="w-64 h-screen bg-gray-100 p-4">
+  <ul class="space-y-2">
+    <li>
+      <a href="/dashboard" class="<%= activePage === 'dashboard' ? 'text-blue-600 font-semibold' : 'text-gray-700' %>">Dashboard</a>
+    </li>
+    <li>
+      <a href="/product" class="<%= activePage === 'product' ? 'text-blue-600 font-semibold' : 'text-gray-700' %>">Products</a>
+    </li>
+    <li>
+      <a href="/user" class="<%= activePage === 'user' ? 'text-blue-600 font-semibold' : 'text-gray-700' %>">Users</a>
+    </li>
   </ul>
 </aside>

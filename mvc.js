@@ -1,5 +1,6 @@
 import express from "express";
 import ProductController from "./src/controllers/product.controller.js";
+import UserController from "./src/controllers/user.controller.js";
 import ejsLayouts from "express-ejs-layouts";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -29,12 +30,13 @@ server.set("layout", "layouts/main");
 
 // Instantiate ProductController
 const productController = new ProductController();
+const userController = new UserController();
 
 // Routes
-server.get("/", (req, res) => {
+/*server.get("/", (req, res) => {
   res.redirect("/product"); // Redirect root to product list
-});
-
+});*/
+//products
 server.get("/product", productController.getProducts);
 server.post("/product/search", productController.searchProducts);
 server.get("/product/new-product", productController.getAddForm);
@@ -49,6 +51,11 @@ server.get(
   productController.getUpdateProductView
 );
 server.get("/product/delete-product/:id", productController.deleteProduct);
+
+//users
+
+server.get("/user", userController.userList);
+server.get("/user/register", userController.getAddForm);
 
 // Start server
 server.listen(3400, () => {

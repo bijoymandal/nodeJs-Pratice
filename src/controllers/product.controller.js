@@ -5,7 +5,11 @@ export default class ProductController {
   getProducts(req, res) {
     let products = ProductModal.getProduct();
     // return res .sendFile(path.join(path.resolve(), 'src', 'views', 'products.html'));
-    res.render("pages/products", { title: "Product list", product: products });
+    res.render("pages/products", {
+      title: "Product list",
+      product: products,
+      activePage: "Product",
+    });
   }
   searchProducts(req, res) {
     const query = req.body.name?.trim().toLowerCase() || "";
@@ -20,6 +24,7 @@ export default class ProductController {
     res.render("partials/productRow", {
       product: filteredProducts,
       layout: false,
+      activePage: "Product",
     });
   }
 
@@ -62,7 +67,11 @@ export default class ProductController {
   updateProduct(req, res) {
     ProductModal.update(req.body);
     var products = ProductModal.getProduct();
-    return res.render("pages/products", { products });
+    return res.render(
+      "pages/products",
+      { products },
+      { activePage: "Product" }
+    );
   }
   deleteProduct(req, res) {
     const id = req.params.id;

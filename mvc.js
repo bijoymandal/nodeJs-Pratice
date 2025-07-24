@@ -6,6 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import validationMiddleware from "./src/middleware/validation.middleware.js";
 import { uploadFile } from "./src/middleware/file-upload.middleware.js";
+import { session } from "express-session";
 
 // Fix __dirname in ES Module
 const __filename = fileURLToPath(import.meta.url);
@@ -19,6 +20,16 @@ server.use(express.json());
 
 // Serve static files (like CSS, JS, images)
 server.use(express.static(path.join(__dirname, "src", "public"))); // store assets in src/public
+
+//server session
+server.use(
+  session({
+    secret: "your-secret-key", // Replace with your secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // Set to true if using HTTPS
+  })
+);
 
 // View engine setup
 server.set("view engine", "ejs");

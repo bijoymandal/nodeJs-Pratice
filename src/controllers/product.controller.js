@@ -8,7 +8,7 @@ export default class ProductController {
     res.render("pages/products", {
       title: "Product list",
       product: products,
-      activePage: "Product",
+      activePage: "product",
     });
   }
   searchProducts(req, res) {
@@ -24,7 +24,7 @@ export default class ProductController {
     res.render("partials/productRow", {
       product: filteredProducts,
       layout: false,
-      activePage: "Product",
+      activePage: "product",
     });
   }
 
@@ -34,6 +34,7 @@ export default class ProductController {
       title: "Create Product",
       subTitle: "Add New Product",
       errorMessage: null,
+      activePage: "product",
     });
   }
   storeAddFrom(req, res) {

@@ -9,6 +9,7 @@ import { uploadFile } from "./src/middleware/file-upload.middleware.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import { setLastVisit } from "./src/middleware/lastVisit.middleware.js";
+import DashboardController from "./src/controllers/dashboard.controller.js";
 
 // Fix __dirname in ES Module
 const __filename = fileURLToPath(import.meta.url);
@@ -43,14 +44,22 @@ server.set("views", path.join(__dirname, "src", "views"));
 server.use(ejsLayouts);
 server.set("layout", "layouts/main");
 
-// Instantiate ProductController
+// Instantiate Controller
 const productController = new ProductController();
 const userController = new UserController();
+const dashboardController = new DashboardController();
 
 // Routes
-/*server.get("/", (req, res) => {
+/* server.get("/", (req, res) => {
   res.redirect("/product"); // Redirect root to product list
 });*/
+//dashboard
+server.use((req, res, next) => {
+  res.locals.activePage = req.path; // Set active page for navigation highlighting
+  next();
+});
+server.get("/dashboard", dashboardController.getDashboard);
+
 //products
 server.get("/product", productController.getProducts);
 server.post("/product/search", productController.searchProducts);

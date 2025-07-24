@@ -6,7 +6,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import validationMiddleware from "./src/middleware/validation.middleware.js";
 import { uploadFile } from "./src/middleware/file-upload.middleware.js";
-import { session } from "express-session";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import { setLastVisit } from "./src/middleware/lastVisit.middleware.js";
 
 // Fix __dirname in ES Module
 const __filename = fileURLToPath(import.meta.url);
@@ -30,7 +32,9 @@ server.use(
     cookie: { secure: false }, // Set to true if using HTTPS
   })
 );
-
+//cookie parser
+server.use(cookieParser());
+server.use(setLastVisit); // Use last visit middleware
 // View engine setup
 server.set("view engine", "ejs");
 server.set("views", path.join(__dirname, "src", "views"));

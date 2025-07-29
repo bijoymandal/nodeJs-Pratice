@@ -1,21 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      <%= typeof title !== 'undefined' ? title : 'My Node Js App' %>
-    </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100 min-h-screen p-6 flex flex-col">
-    <%- include('../partials/header')%>
-    <div class="flex flex-1">
-      <%- include('../partials/sidebar') %>
-      <main class="flex-1 p-6 bg-white"><%-body%></main>
-    </div>
-    <!-- Placeholder for rendering other ejs views-->
 
-    <%- include('../partials/footer')%>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>
+    <%= typeof title !=='undefined' ? title : 'My Node Js App' %>
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen p-6 flex flex-col">
+  <%- include('../partials/header')%>
+    <%- include('../../components/modal.ejs')%>
+      <div class="flex flex-1">
+        <%- include('../partials/sidebar') %>
+          <main class="flex-1 p-6 bg-white"><%-body%></main>
+      </div>
+      <!-- Placeholder for rendering other ejs views-->
+
+      <%- include('../partials/footer')%>
+        <script>
+          function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            document.getElementById('modal').classList.remove('flex');
+            document.getElementById('modal-content').innerHTML = '';
+          }
+          function openModal(contentHTML) {
+            document.getElementById('modal-content').innerHTML = contentHTML;
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal').classList.add('flex');
+          }
+          function openSignInModal() {
+            const formHTML = `
+    <h2 class="text-xl font-semibold mb-4">Sign In</h2>
+    <form action="/signup" method="POST" class="space-y-4">
+      <label class="block text-sm font-medium text-gray-700">Name</label>
+      <input name="name" required placeholder="Name" class="w-full p-2 border rounded" />
+      <label class="block text-sm font-medium text-gray-700">Email</label>
+      <input name="email" type="email" required placeholder="Email" class="w-full p-2 border rounded" />
+      <div class="flex justify-end gap-2">
+        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded bg-red-300 text-white">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Submit</button>
+      </div>
+    </form>
+  `;
+            openModal(formHTML);
+          }
+          function openSignUpModal() {
+            const formHTML = `
+    <h2 class="text-xl font-semibold mb-4">Sign Up</h2>
+    <form action="/signup" method="POST" class="space-y-4">
+      <label class="block text-sm font-medium text-gray-700">Name</label>
+      <input name="name" required placeholder="Name" class="w-full p-2 border rounded" />
+      <label class="block text-sm font-medium text-gray-700">Email</label>
+      <input name="email" type="email" required placeholder="Email" class="w-full p-2 border rounded" />
+      <label class="block text-sm font-medium text-gray-700">Password</label>
+      <input name="password" type="password" required placeholder="Password" class="w-full p-2 border rounded" />
+      <div class="flex justify-end gap-2">
+        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-red-300 text-white rounded ">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Submit</button>
+      </div>
+    </form>
+  `;
+            openModal(formHTML);
+          }
+        </script>
+</body>
+
 </html>

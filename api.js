@@ -1,6 +1,7 @@
 import express from "express";
 import userRouter from "./src/feature/user/user.routes.js";
 import basicAuthorizer from "./src/middleware/basicAuth.middleware.js";
+import productRouter from "./src/feature/product/routes/product.routes.js";
 
 const server = express();
 server.use(express.json());
@@ -8,7 +9,9 @@ server.get("/", (req, res) => {
   res.send("Welcome to Ecommerce API");
 });
 
-server.use("/api/users",basicAuthorizer ,userRouter);
+server.use("/api/product",basicAuthorizer,productRouter);
+server.use("/api/users" ,userRouter);
+
 
 server.listen(3200);
 console.log("server is running at 3200");

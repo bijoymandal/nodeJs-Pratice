@@ -1,13 +1,13 @@
-import UserModel from "./user.model.js";
+import { UserModel } from "../../feature/user/user.model.js";
 
 export class UserController {
   signUp(req, res) {
     const { name, email, password, type } = req.body;
     try {
-      const user = UserModel.SignUp(name, email, password, type);
+      const user = UserModel.signUp(name, email, password, type);
       res
         .status(201)
-        .json({ message: "User registered successfully" })
+        .json({ message: "User registered successfully",data: user })
         .send(user);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -16,7 +16,7 @@ export class UserController {
   signIn(req, res) {
     const { email, password } = req.body;
     try {
-      const user = UserModel.SignIn(email, password);
+      const user = UserModel.signIn(email, password);
       res.status(200).json({ message: "User signed in successfully", user });
     } catch (error) {
       res.status(401).json({ error: error.message });

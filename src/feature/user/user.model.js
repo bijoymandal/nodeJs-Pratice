@@ -6,12 +6,12 @@ export class UserModel {
     this.type = type; // 'admin' or 'user'
     this.id = id;
   }
-  static SignUp(name, email, password, type) {
+  static signUp(name, email, password, type) {
     const newUser = new UserModel(name, email, password, type);
     newUser.id = users.length + 1; // Simple ID generation
     users.push(newUser);
   }
-  static SignIn(email, password) {
+  static signIn(email, password) {
     const user = users.find(
       (user) => user.email === email && user.password === password
     );
@@ -20,6 +20,10 @@ export class UserModel {
     } else {
       throw new Error("Invalid email or password");
     }
+  }
+  static getAll()
+  {
+    return users;
   }
 }
 

@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { UserModel } from "../../feature/user/user.model.js";
 
 export class UserController {
@@ -14,12 +15,18 @@ export class UserController {
     }
   }
   signIn(req, res) {
-    const { email, password } = req.body;
-    try {
-      const user = UserModel.signIn(email, password);
-      res.status(200).json({ message: "User signed in successfully", user });
-    } catch (error) {
-      res.status(401).json({ error: error.message });
+    const result  = UserModel.signIn(req.body.email, req.body.password); 
+    console.log(result);
+    if(!result){
+      res.status(401).json({ message: "Invalid email or password" });
+    }
+    else{
+        //1. create token 
+        const token = jwt.sign({userID:result.id,email:result.email},"ezt2BC7QWScw510rVLFaWXK18Kvb1jL5",{expiresIn:"1h"});
+        //2. send token to client
+      res.status(200).send(token);
+      //access token
+      // res.cookie("jwtToken",token,{httpOnly:true});
     }
   }
   getUserProfile(req, res) {

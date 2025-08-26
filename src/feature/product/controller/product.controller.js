@@ -1,8 +1,8 @@
-import { fetchAllProducts } from "../model/product.model.js";
+import ProductModal from "../model/product.model.js";
 
 export const getAllProducts = (req, res,next) => {
-    const products = fetchAllProducts();
-    res.status(200).json({success:true,products});
+    const products = ProductModal.fetchAllProducts();
+    res.status(200).json({success:true,message:"Product fetch successfully",products});
 }
 
 export const getOneProduct = (req, res,next) => {

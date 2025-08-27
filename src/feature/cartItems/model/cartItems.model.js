@@ -21,11 +21,15 @@ export default class CartItemsModel {
        cartItems.push(cartItem);
        return cartItem;
     }
+
+    static get(userID) {
+        return cartItems.filter((item) => item.userID == userID);
+    }
 }
 
 
 let cartItems = [
-    new CartItemsModel(2,1,2),
-    new CartItemsModel(2,2,1),
-    new CartItemsModel(2,3,4),
+    new CartItemsModel(1,1,2,1),
+    new CartItemsModel(2,2,1,2),
+    new CartItemsModel(3,3,4,3),
 ];

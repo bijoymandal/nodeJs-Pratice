@@ -9,4 +9,9 @@ export class CartItemsController {
         CartItemsModel.add(productID,userID, quantity);
         res.status(200).json({success:true,message:"Product added to cart successfully"});
     }
+    get(req, res) {
+        const userID = req.userID;
+        const cartItems = CartItemsModel.get(userID);
+        res.status(200).json({success:true,cartItems:cartItems});
+    }
 }

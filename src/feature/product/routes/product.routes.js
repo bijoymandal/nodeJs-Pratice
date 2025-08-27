@@ -1,5 +1,5 @@
 import express from "express";
-import {addProduct,getAllProducts,getOneProduct,rateProduct} from "../controller/product.controller.js";
+import {addProduct,getAllProducts,getOneProduct,rateProductData} from "../controller/product.controller.js";
 
 const productRouter = express.Router();
 
@@ -8,6 +8,6 @@ productRouter.get("/", getAllProducts);
 productRouter.get("/:id", getOneProduct);
 //post routes
 productRouter.post("/add", addProduct);
-productRouter.post("/rate/:id", rateProduct);
+productRouter.post("/rate", rateProductData);
 
 export default productRouter;

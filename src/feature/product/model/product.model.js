@@ -39,6 +39,9 @@ export default class ProductModel {
             throw new Error("Product not found");
         }
         //3. check if ratings array exist or not
+        if(!product.rating<0 || !product.rating>5){
+            throw new Error("Rating should be between 0 and 5");
+        }
         if(!product.ratings){
             product.ratings = [];
             product.ratings.push({userID:userID, rating:rating});

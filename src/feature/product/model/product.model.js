@@ -1,3 +1,5 @@
+import {UserModel} from "../../user/user.model.js";
+
 let id=1;
 export default class ProductModel {
     static products = [];
@@ -20,11 +22,39 @@ export default class ProductModel {
     }
 
     static getOneProduct(id) {
-        return this.products.find(product => product.id === id);
+        return this.products.find(product => product.id == id);
     }
 
-    static rateProduct(userID, productID,rating) {
-        
+    static rateProducts(userID, productID,rating) {
+        //1. validate user and product
+        const user = UserModel.getAll().find(user => user.id == userID); //check user exist or not
+        console.log("user",user);
+        if (!user) {
+            throw new Error("User not found");
+        }
+        //2. validate product
+        const product = ProductModel.getOneProduct(productID);
+        // console.log("product",product);
+        if (!product) {
+            throw new Error("Product not found");
+        }
+        //3. check if ratings array exist or not
+        if(!product.ratings){
+            product.ratings = [];
+            product.ratings.push({userID:userID, rating:rating});
+        }
+        else{
+            //4. check if user already rated the product
+            const existingRating = product.ratings.findIndex(r => r.userID == userID);
+            if (existingRating>=0) {
+                //update the rating
+                existingRating.rating = rating;
+                // product.ratings[existingRating].rating = {userID:userID,rating:rating};
+            } else {
+                //add new rating
+                product.ratings.push({userID:userID, rating:rating});
+            }
+        }
     }
 
     static addProduct({title, description, price,imageUrl,category,sizes=[]}){

@@ -2,6 +2,7 @@ import express from "express";
 import userRouter from "./src/feature/user/user.routes.js";
 import jwtAuth from "./src/middleware/jwt.middleware.js";
 import productRouter from "./src/feature/product/routes/product.routes.js";
+import cartItemsRouter from "./src/feature/cartItems/routes/cartItems.route.js";
 
 const server = express();
 server.use(express.json());
@@ -11,6 +12,7 @@ server.get("/", (req, res) => {
 
 server.use("/api/product",jwtAuth,productRouter);
 server.use("/api/users" ,userRouter);
+server.use('/api/cartItems',jwtAuth,cartItemsRouter);
 
 
 server.listen(3200);

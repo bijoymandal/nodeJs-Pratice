@@ -149,6 +149,45 @@
                     }
                 }
             }
+        },
+        "/api/cartItems": {
+            "get": {
+                "tags": [
+                    "CartItems"
+                ],
+                "summary": "Get Cart Items",
+                "description": "Endpoint to retrieve all cart items for the authenticated user",
+                "security": [
+                    {
+                        "JWT": {}
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of cart items",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "productId": {
+                                        "type": "string"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
         }
     }
 }

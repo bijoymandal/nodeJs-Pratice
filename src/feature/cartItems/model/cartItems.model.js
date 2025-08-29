@@ -29,6 +29,15 @@ export default class CartItemsModel {
     static get(userID) {
         return cartItems.filter((item) => item.userID == Number(userID));
     }
+
+    static delete(id,userID) {
+        const index = cartItems.findIndex((item) => item.id == Number(id) && item.userID == Number(userID));
+        if (index !== -1) {
+            const deletedItem = cartItems.splice(index, 1);
+            return deletedItem[0];
+        }
+        return null;
+    }
 }
 
 

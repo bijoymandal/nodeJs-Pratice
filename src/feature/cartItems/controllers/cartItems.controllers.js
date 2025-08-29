@@ -1,3 +1,4 @@
+
 import CartItemsModel from "../model/cartItems.model.js";
 
 export class CartItemsController {
@@ -12,5 +13,14 @@ export class CartItemsController {
         const cartItems = CartItemsModel.get(userID);
         res.status(200).json({success:true,cartItems:cartItems});
     }
-    
+    delete(req, res) {
+        const userID = req.user.userID;
+        const {id} = req.params;
+        const deletedItem = CartItemsModel.delete(id,userID);
+        if (deletedItem) {
+            res.status(200).json({success:true,message:"Cart item deleted successfully",deletedItem:deletedItem});
+        } else {
+            res.status(404).json({success:false,message:"Cart item not found"});
+        }
+    }
 }

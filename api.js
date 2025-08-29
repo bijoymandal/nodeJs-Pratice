@@ -21,7 +21,7 @@ server.get("/", (req, res) => {
   res.send("Welcome to Ecommerce API");
 });
 //Middleware to haldle 404 error
-server.use((req, res) => {
+server.use((req, res,next) => {
   res.status(404).json({ message: "Route not found,Please check our documentation for more information at localhost:3200/api-docs" });
 });
 

@@ -14,6 +14,17 @@ const apiDocs = JSON.parse(
   fs.readFileSync(new URL("./swagger.json", import.meta.url), "utf-8")
 );
 
+// CROS Policy Configuration
+server.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  //return ok for proflight request
+  if(req.method =="OPTIONS"){
+    return res.status(200).json({});
+  }
+  next();
+});
 const server = express();
 server.use(express.json());
 //default request handler
@@ -21,9 +32,11 @@ server.get("/", (req, res) => {
   res.send("Welcome to Ecommerce API");
 });
 //Middleware to haldle 404 error
-server.use((req, res,next) => {
-  res.status(404).json({ message: "Route not found,Please check our documentation for more information at localhost:3200/api-docs" });
-});
+// server.use((req, res,next) => {
+//   res.status(404).json({ message: "Route not found,Please check our documentation for more information at localhost:3200/api-docs" });
+// });
+
+
 
 
 server.use('/api-docs', swagger.serve, swagger.setup(apiDocs));

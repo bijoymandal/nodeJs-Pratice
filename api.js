@@ -16,10 +16,18 @@ const apiDocs = JSON.parse(
 
 const server = express();
 server.use(express.json());
+//default request handler
 server.get("/", (req, res) => {
   res.send("Welcome to Ecommerce API");
 });
+//Middleware to haldle 404 error
+server.use((req, res) => {
+  res.status(404).json({ message: "Route not found,Please check our documentation for more information at localhost:3200/api-docs" });
+});
+
+
 server.use('/api-docs', swagger.serve, swagger.setup(apiDocs));
+
 server.use("/api/product",jwtAuth,productRouter);
 server.use("/api/users" ,userRouter);
 server.use('/api/cartItems',jwtAuth,cartItemsRouter);

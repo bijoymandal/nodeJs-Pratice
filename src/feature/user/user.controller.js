@@ -11,7 +11,7 @@ export class UserController {
         .json({ message: "User registered successfully",data: user })
         .send(user);
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message,"message": "User registration failed" });
     }
   }
   signIn(req, res) {

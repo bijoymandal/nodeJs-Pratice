@@ -31,7 +31,8 @@
     "jest-json-reporter": "^1.2.2",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.1",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.3",
+    "swagger-ui-express": "^5.0.1"
   },
   "type": "module"
 }

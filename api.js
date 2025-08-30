@@ -1,6 +1,9 @@
 import fs from "fs";
 import express from "express";
 import swagger from "swagger-ui-express";
+import cros from "cors";
+
+
 // import apiDocs from './swagger.json' assert { type: 'json' };
 
 
@@ -15,6 +18,13 @@ const apiDocs = JSON.parse(
 );
 
 // CROS Policy Configuration
+var corsOptions = {
+  origin: 'http://localhost:4200',
+}
+server.use(cros(corsOptions));
+
+
+/*
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -24,7 +34,8 @@ server.use((req, res, next) => {
     return res.status(200).json({});
   }
   next();
-});
+}); 
+/*
 const server = express();
 server.use(express.json());
 //default request handler

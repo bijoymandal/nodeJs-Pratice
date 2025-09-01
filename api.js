@@ -12,20 +12,25 @@ import userRouter from "./src/feature/user/user.routes.js";
 import jwtAuth from "./src/middleware/jwt.middleware.js";
 import productRouter from "./src/feature/product/routes/product.routes.js";
 import cartItemsRouter from "./src/feature/cartItems/routes/cartItems.route.js";
+import loggerMiddleware from "./src/middleware/logger.middleware.js";
 
 const apiDocs = JSON.parse(
   fs.readFileSync(new URL("./swagger.json", import.meta.url), "utf-8")
 );
+const server = express();
+server.use(express.json());
 
 // CROS Policy Configuration
 var corsOptions = {
-  origin: 'http://localhost:4200',
+  origin: "*", // allow all origins, or specify ["http://localhost:3000"]
+  // methods: ["GET", "POST", "PUT", "DELETE"],
+  // allowedHeaders: ["Content-Type", "Authorization"],
 }
 server.use(cros(corsOptions));
 
 
-/*
-server.use((req, res, next) => {
+
+/*server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -35,9 +40,8 @@ server.use((req, res, next) => {
   }
   next();
 }); 
-/*
-const server = express();
-server.use(express.json());
+*/
+
 //default request handler
 server.get("/", (req, res) => {
   res.send("Welcome to Ecommerce API");
@@ -51,6 +55,8 @@ server.get("/", (req, res) => {
 
 
 server.use('/api-docs', swagger.serve, swagger.setup(apiDocs));
+server.use(loggerMiddleware);
+
 
 server.use("/api/product",jwtAuth,productRouter);
 server.use("/api/users" ,userRouter);
@@ -59,3 +65,4 @@ server.use('/api/cartItems',jwtAuth,cartItemsRouter);
 
 server.listen(3200);
 console.log("server is running at 3200");
+

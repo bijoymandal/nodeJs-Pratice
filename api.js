@@ -5,14 +5,12 @@ import cros from "cors";
 
 
 // import apiDocs from './swagger.json' assert { type: 'json' };
-
-
-
 import userRouter from "./src/feature/user/user.routes.js";
 import jwtAuth from "./src/middleware/jwt.middleware.js";
 import productRouter from "./src/feature/product/routes/product.routes.js";
 import cartItemsRouter from "./src/feature/cartItems/routes/cartItems.route.js";
 import loggerMiddleware from "./src/middleware/logger.middleware.js";
+import { ApplicationError } from "./src/error-handler/applicationError.js";
 
 const apiDocs = JSON.parse(
   fs.readFileSync(new URL("./swagger.json", import.meta.url), "utf-8")
@@ -28,7 +26,17 @@ var corsOptions = {
 }
 server.use(cros(corsOptions));
 
+//error handler middleware
+server.use((error,req,res,next)=>{
+  console.log(err);
 
+  if(err instanceof ApplicationError){
+    res.status(err.code).send(err.message);
+  }
+  //server error 
+
+  res.statuc(503).send('Something went wrong,please try later');
+});
 
 /*server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

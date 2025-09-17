@@ -17,6 +17,11 @@ export default class ProductModel {
         ProductModel.products.push(this);
         
     }
+    static get(id)
+    {
+        const product = this.products.find((i)=>i.id == id);
+        return product;
+    }
 
     static fetchAllProducts(){
         return this.products;

@@ -5,8 +5,18 @@ export const getAllProducts = (req, res,next) => {
     res.status(200).json({success:true,message:"Product fetch successfully",products});
 }
 
-export const getOneProduct = (req, res,next) => {
-    res.json({message:"get one product",success:true});
+export const getOneProduct = (req, res) => {
+    const id = req.params.id;
+    const product = ProductModel.get(id);
+    if(!product)
+    {
+        return res.status(404).json({message:"product Not found"});
+    }
+    else
+    {
+        return res.status(200).json({message:"product get successfully",data:product});
+    }
+    
 }
 
 export const addProduct = (req, res,next) => {

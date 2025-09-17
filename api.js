@@ -35,7 +35,7 @@ server.use((error,req,res,next)=>{
   }
   //server error 
 
-  res.statuc(503).send('Something went wrong,please try later');
+  res.status(503).send('Something went wrong,please try later');
 });
 
 /*server.use((req, res, next) => {

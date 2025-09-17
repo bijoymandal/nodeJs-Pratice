@@ -201,6 +201,74 @@
                 }
             }
         },
+        "/api/product/filter": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Filter products",
+                "description": "Filter products based on query parameters like maxPrice, category, etc.",
+                "parameters": [
+                    {
+                        "name": "maxPrice",
+                        "in": "query",
+                        "required": false,
+                        "type": "number",
+                        "description": "Maximum price of products"
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Category of products"
+                    },
+                    {
+                        "name": "minPrice",
+                        "in": "query",
+                        "required": false,
+                        "type": "number",
+                        "description": "Minimum price of products"
+                    }
+                ],
+                "security": [
+                    {
+                        "JWT": {}
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Filtered list of products",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "product Not found"
+                    }
+                }
+            }
+        },
         "/api/cartItems": {
             "get": {
                 "tags": [

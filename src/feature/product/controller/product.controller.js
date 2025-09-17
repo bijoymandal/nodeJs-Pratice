@@ -23,6 +23,25 @@ export const addProduct = (req, res,next) => {
     res.json({message:"add one product",success:true});
 }
 
+
+
+
+export const filterProducts= (req,res)=>{
+    const minPrice = req.query.minPrice;
+    const maxPrice = req.query.maxPrice;
+    const category = req.query.category;
+    
+    const result = ProductModel.filter(minPrice,maxPrice,category);
+    if(!result)
+    {
+        return res.status(404).json({message:"product not found"})
+    }
+    else
+    {
+        return res.status(200).json(result);
+    }
+}
+
 export const rateProductData = (req, res) => {
     const userID = req.query.userID; 
     const productID= req.query.productID;

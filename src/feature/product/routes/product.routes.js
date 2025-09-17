@@ -10,6 +10,9 @@ productRouter.get("/", getAllProducts);
 productRouter.post("/add", addProduct);
 productRouter.post("/rate", rateProductData);
 
+// product filter 
+productRouter.get('/filter',filterProducts);
+
 //product get product
 productRouter.get("/:id", getOneProduct);
 

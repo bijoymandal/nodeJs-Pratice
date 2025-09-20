@@ -1,23 +1,33 @@
 import jwt from "jsonwebtoken";
 import { UserModel } from "../../feature/user/user.model.js";
+import UserRepository from "../../feature/user/user.repository.js";
 
 export class UserController {
+  // user Repository using get logic validation
+  constructor() {
+    this.userRepository = new UserRepository(); 
+
+  }
+  
+  
   async signUp(req, res) {
     const { name, email, password, type } = req.body;
     try {
-      const user = await UserModel.signUp(name, email, password, type);
+      const user = new UserModel(name, email, password, type);
+      await this.userRepository.signUp(user);
       res
         .status(201)
-        .json({ message: "User registered successfully",data: user })
-        .send(user);
+        .json({ message: "User registered successfully",data: user });
     } catch (error) {
       res.status(400).json({ error: error.message,"message": "User registration failed" });
     }
   }
+
+
   async signIn(req, res) {
     const {email,password} = req.body;
 
-    const result  = await UserModel.signIn(email, password); 
+    const result  = await this.userRepository.signIn(email, password); 
     console.log(result);
     
 

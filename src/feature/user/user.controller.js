@@ -14,9 +14,13 @@ export class UserController {
       res.status(400).json({ error: error.message,"message": "User registration failed" });
     }
   }
-  signIn(req, res) {
-    const result  = UserModel.signIn(req.body.email, req.body.password); 
+  async signIn(req, res) {
+    const {email,password} = req.body;
+
+    const result  = await UserModel.signIn(email, password); 
     console.log(result);
+    
+
     if(!result){
       res.status(401).json({ message: "Invalid email or password" });
     }

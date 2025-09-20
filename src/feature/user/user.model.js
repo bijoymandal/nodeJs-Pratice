@@ -27,7 +27,22 @@ export class UserModel {
     }
     
   }
-  static signIn(email, password) {
+  static async signIn(email, password) {
+    try{
+      const db = getDB();
+      const collection = db.collection("users");
+      const user = await collection.findOne({email:email,password:password});
+      if(!user){
+        throw new ApplicationError("Invalid email or password",401);
+      }
+      return user;
+    }
+    catch(error)
+    {
+      throw new ApplicationError("Something went Wrong",500);
+    }
+
+
     const user = users.find(
       (user) => user.email === email && user.password === password
     );

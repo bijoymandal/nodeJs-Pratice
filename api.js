@@ -2,7 +2,7 @@ import fs from "fs";
 import express from "express";
 import swagger from "swagger-ui-express";
 import cros from "cors";
-import connectToMongoDB from './src/config/mongodb.js';
+import {connectToMongoDB} from './src/config/mongodb.js';
 
 
 // import apiDocs from './swagger.json' assert { type: 'json' };

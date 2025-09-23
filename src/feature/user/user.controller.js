@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { UserModel } from "../../feature/user/user.model.js";
 import UserRepository from "../../feature/user/user.repository.js";
+import bcrypyt from "bcrypt";
 
 export class UserController {
   // user Repository using get logic validation
@@ -13,7 +14,9 @@ export class UserController {
   async signUp(req, res) {
     const { name, email, password, type } = req.body;
     try {
-      const user = new UserModel(name, email, password, type);
+      const hashedPassword = await bcrypyt.hash(password, 12);
+      const user = new UserModel(name, email, hashedPassword, type);
+      
       await this.userRepository.signUp(user);
       res
         .status(201)
@@ -26,21 +29,24 @@ export class UserController {
 
   async signIn(req, res) {
     const {email,password} = req.body;
-
-    const result  = await this.userRepository.signIn(email, password); 
-    console.log(result);
-    
-
-    if(!result){
-      res.status(401).json({ message: "Invalid email or password" });
-    }
+    const userEmail = await this.userRepository.findByEmail(email);
+    if(!userEmail){
+      return res.status(400).json({ message: "Invalid email or password" });
+    } 
     else{
+      const isPasswordValid = await bcrypyt.compare(password, userEmail.password);
+      if(isPasswordValid){
         //1. create token 
-        const token = jwt.sign({userID:result.id,email:result.email},"ezt2BC7QWScw510rVLFaWXK18Kvb1jL5",{expiresIn:"1h"});
+        const token = jwt.sign({userID:isPasswordValid.id,email:userEmail.email},"ezt2BC7QWScw510rVLFaWXK18Kvb1jL5",{expiresIn:"1h"});
         //2. send token to client
-      res.status(200).send(token);
-      //access token
-      // res.cookie("jwtToken",token,{httpOnly:true});
+        return res.status(200).send(token);
+        //access token
+        // res.cookie("jwtToken",token,{httpOnly:true});
+      }
+      else
+      {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
     }
   }
   getUserProfile(req, res) {

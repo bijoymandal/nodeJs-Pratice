@@ -1,8 +1,13 @@
+import "./env.js";
 import fs from "fs";
 import express from "express";
 import swagger from "swagger-ui-express";
 import cros from "cors";
 import {connectToMongoDB} from './src/config/mongodb.js';
+
+
+// console.log(process.env.DB_URL);
+// console.log(process.env.JWT_SECRET);
 
 
 // import apiDocs from './swagger.json' assert { type: 'json' };
@@ -17,6 +22,8 @@ const apiDocs = JSON.parse(
   fs.readFileSync(new URL("./swagger.json", import.meta.url), "utf-8")
 );
 const server = express();
+
+//middleware to parse json request body
 server.use(express.json());
 
 // CROS Policy Configuration

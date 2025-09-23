@@ -55,3 +55,6 @@
 {"level":"info","message":"/api/users/signIn - {\"email\":\"seller1122@example.com\",\"password\":\"seller@123\"}","service":"request-logging"}
 {"level":"info","message":"/api/users/signIn - {\"email\":\"seller1122@example.com\",\"password\":\"seller@123!\"}","service":"request-logging"}
 {"level":"info","message":"/api/users/signIn - {\"email\":\"seller1122@example.com\",\"password\":\"seller@123\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signup - {\"name\":\"seller12\",\"email\":\"seller12@example.com\",\"password\":\"seller@12\",\"type\":\"seller\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller12@example.com\",\"password\":\"seller12\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller12@example.com\",\"password\":\"seller@12\"}","service":"request-logging"}

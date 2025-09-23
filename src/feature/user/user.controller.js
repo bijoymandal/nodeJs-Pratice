@@ -37,7 +37,7 @@ export class UserController {
       const isPasswordValid = await bcrypyt.compare(password, userEmail.password);
       if(isPasswordValid){
         //1. create token 
-        const token = jwt.sign({userID:isPasswordValid.id,email:userEmail.email},"ezt2BC7QWScw510rVLFaWXK18Kvb1jL5",{expiresIn:"1h"});
+        const token = jwt.sign({userID:isPasswordValid.id,email:userEmail.email},process.env.JWT_SECRET,{expiresIn:"1h"});
         //2. send token to client
         return res.status(200).send(token);
         //access token

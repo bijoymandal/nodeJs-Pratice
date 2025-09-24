@@ -1,56 +1,98 @@
 import ProductModel from "../model/product.model.js";
+import {add,getAll,get} from "../../../feature/product/repository/product.repository.js";
 
-export const getAllProducts = (req, res,next) => {
-    const products = ProductModel.fetchAllProducts();
-    res.status(200).json({success:true,message:"Product fetch successfully",products});
-}
+// const productRepo = new ProductRepository();
 
-export const getOneProduct = (req, res) => {
+export const getAllProducts = async (req, res) => {
+  try {
+    const products = await getAll();
+    return res
+      .status(200)
+      .json({ success: true, message: "Products fetched successfully", products });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Something went wrong" });
+  }
+};
+
+export const getOneProduct = async (req, res) => {
+  try {
     const id = req.params.id;
-    const product = ProductModel.get(id);
-    if(!product)
-    {
-        return res.status(404).json({message:"product Not found"});
-    }
-    else
-    {
-        return res.status(200).json({message:"product get successfully",data:product});
-    }
-    
-}
+    const product = await get(id);
 
-export const addProduct = (req, res,next) => {
-    res.json({message:"add one product",success:true});
-}
-
-
-
-
-export const filterProducts= (req,res)=>{
-    const minPrice = req.query.minPrice;
-    const maxPrice = req.query.maxPrice;
-    const category = req.query.category;
-    
-    const result = ProductModel.filter(minPrice,maxPrice,category);
-    if(!result)
-    {
-        return res.status(404).json({message:"product not found"})
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
     }
-    else
-    {
-        return res.status(200).json(result);
-    }
-}
 
-export const rateProductData = (req, res) => {
-    const userID = req.query.userID; 
-    const productID= req.query.productID;
-    const rating = req.query.rating;
-    try{
-        ProductModel.rateProducts(userID, productID,rating);
+    return res
+      .status(200)
+      .json({ message: "Product fetched successfully", data: product });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Something went wrong" });
+  }
+};
+
+export const addProduct = async (req, res) => {
+  try {
+    const { title, description, price, category, sizes } = req.body;
+
+    if (!title || !description || !price || !category || !req.file?.filename || !sizes) {
+      return res.status(400).json({ message: "All fields are required" });
     }
-    catch(error){
-        return res.status(400).json({ success: false, message: error.message });
+
+    const newProduct = new ProductModel(
+      title,
+      description,
+      parseFloat(price),
+      req.file.filename,
+      category,
+      sizes.split(",")
+    );
+
+    await add(newProduct);
+
+    return res
+      .status(201)
+      .json({ message: "Product added successfully", data: newProduct });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Something went wrong, please try again later" });
+  }
+};
+
+export const filterProducts = async (req, res) => {
+  try {
+    const { minPrice, maxPrice, category } = req.query;
+
+    // Example: Assuming your model has a filter method
+    const result = await ProductModel.filter(minPrice, maxPrice, category);
+
+    if (!result || result.length === 0) {
+      return res.status(404).json({ message: "Products not found" });
     }
-    return res.status(200).json({ success: true, message: "Product rated successfully",product: ProductModel.getOneProduct(productID) });
-}                                                                                                       
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const rateProductData = async (req, res) => {
+  try {
+    const { userID, productID, rating } = req.query;
+
+    await ProductModel.rateProducts(userID, productID, rating);
+
+    return res.status(200).json({
+      success: true,
+      message: "Product rated successfully",
+      product: await productRepo.get(productID),
+    });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};

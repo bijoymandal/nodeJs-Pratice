@@ -4,7 +4,7 @@ import express from "express";
 import swagger from "swagger-ui-express";
 import cros from "cors";
 import {connectToMongoDB} from './src/config/mongodb.js';
-
+connectToMongoDB();
 
 // console.log(process.env.DB_URL);
 // console.log(process.env.JWT_SECRET);

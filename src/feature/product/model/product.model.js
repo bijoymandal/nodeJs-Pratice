@@ -1,11 +1,11 @@
-import { ApplicationError } from "../../../error-handler/applicationError.js";
+// import { ApplicationError } from "../../../error-handler/applicationError.js";
 import {UserModel} from "../../user/user.model.js";
 
 let id=1;
 export default class ProductModel {
     static products = [];
-    constructor(title, description, price,imageUrl,category,sizes=[]) {
-        this.id = id++;
+    constructor(title, description, price,imageUrl,category,sizes=[],id) {
+        this._id = id; 
         this.title = String(title);
         this.description = String(description);
         this.price = Number(price);

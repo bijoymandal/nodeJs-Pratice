@@ -1,19 +1,29 @@
 import express from "express";
-import {addProduct,getAllProducts,getOneProduct,rateProductData,filterProducts} from "../controller/product.controller.js";
+import {getAllProducts,addProduct,rateProductData,filterProducts,getOneProduct} from "../controller/product.controller.js";
 
 const productRouter = express.Router();
 
 //get routes
-productRouter.get("/", getAllProducts);
+productRouter.get("/", (req,res)=>{
+    ProductController.getAllProducts(req,res);
+});
 
 //post routes
-productRouter.post("/add", addProduct);
-productRouter.post("/rate", rateProductData);
+productRouter.post("/add", (req,res)=>{
+    ProductController.addProduct(req,res)
+});
+productRouter.post("/rate", (req,res)=>{
+    ProductController.rateProductData(req,res)
+});
 
 // product filter 
-productRouter.get('/filter',filterProducts);
+productRouter.get('/filter',(req,res)=>{
+    ProductController.filterProducts(req,res)
+});
 
 //product get product
-productRouter.get("/:id", getOneProduct);
+productRouter.get("/:id",(req,res)=>{
+    ProductController.getOneProduct(req,res)
+});
 
 export default productRouter;

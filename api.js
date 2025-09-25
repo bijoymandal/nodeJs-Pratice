@@ -36,10 +36,10 @@ server.use(cros(corsOptions));
 
 //error handler middleware
 server.use((error,req,res,next)=>{
-  console.log(err);
+  console.log(error);
 
-  if(err instanceof ApplicationError){
-    res.status(err.code).send(err.message);
+  if(error instanceof ApplicationError){
+    res.status(error.code).send(error.message);
   }
   //server error 
 
@@ -74,7 +74,7 @@ server.use('/api-docs', swagger.serve, swagger.setup(apiDocs));
 server.use(loggerMiddleware);
 
 
-server.use("/api/product",jwtAuth,productRouter);
+server.use("/api/product",jwtAuth,loggerMiddleware,productRouter);
 server.use("/api/users" ,userRouter);
 server.use('/api/cartItems',jwtAuth,cartItemsRouter);
 

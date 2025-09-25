@@ -1,29 +1,33 @@
-import fs from 'fs';
-import winston from 'winston';
-const fsPromise = fs.promises;
-// async function log(logData)
-// {
-//     try{
-//         logData = `\n ${new Date().toString()} - ${logData}`; 
-//         await fsPromise.appendFile('log.txt',logData);
-//     }
-//     catch(error)
-//     {
-//         console.log(error);
-//     }
-// }
+import winston from "winston";
 
-const logger = winston.createLogger({level:'info',format:winston.format.json(),defaultMeta:{service:'request-logging'},transports:[new winston.transports.File({filename:'logs.txt'})]})
-const loggerMiddleware = async(req,res,next)=>
-{
-    //1. Log request body
-    if(!req.url.includes('signin'))
-    {
-        const logData = `${req.url} - ${JSON.stringify(req.body)}`;
-        // await log(logData);
-        logger.info(logData);
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.json()
+  ),
+  defaultMeta: { service: "request-logging" },
+  transports: [
+    new winston.transports.File({ filename: "logs.txt" }),
+  ],
+});
+
+const loggerMiddleware = (req, res, next) => {
+  try {
+    if (!req.url.includes("signin")) {
+      const logData = {
+        url: req.originalUrl,
+        method: req.method,
+        body: req.body,
+      };
+      logger.info(logData);
     }
-    next();
+  } catch (err) {
+    console.error("Logging error:", err);
+    // ❌ Do NOT send res here
+  }
+
+  next(); // ✅ always call next, but do NOT send response
 };
 
 export default loggerMiddleware;

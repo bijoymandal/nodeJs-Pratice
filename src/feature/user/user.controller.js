@@ -29,7 +29,9 @@ export class UserController {
 
   async signIn(req, res) {
     const {email,password} = req.body;
+    
     const userEmail = await this.userRepository.findByEmail(email);
+    
     if(!userEmail){
       return res.status(400).json({ message: "Invalid email or password" });
     } 
@@ -37,7 +39,7 @@ export class UserController {
       const isPasswordValid = await bcrypyt.compare(password, userEmail.password);
       if(isPasswordValid){
         //1. create token 
-        const token = jwt.sign({userID:isPasswordValid.id,email:userEmail.email},process.env.JWT_SECRET,{expiresIn:"1h"});
+        const token = jwt.sign({userID:userEmail._id.toString(),email:userEmail.email},process.env.JWT_SECRET,{expiresIn:"1h"});
         //2. send token to client
         return res.status(200).send(token);
         //access token

@@ -9,15 +9,15 @@ const jwtAuth = (req, res, next) => {
     }
     //3. if token is there, verify and validate the token
     try{
-        const payload = jwt.verify(token,"ezt2BC7QWScw510rVLFaWXK18Kvb1jL5");
-        
+        const payload = jwt.verify(token,process.env.JWT_SECRET);
+        console.log("payload",payload);
         
         if(!payload || !payload.userID){
             return res.status(401).json({message:"Unauthorized. Invalid token"});
         }
         console.log(payload);
         req.user = payload;
-        next();
+        // next();
     }
     catch(err){
 

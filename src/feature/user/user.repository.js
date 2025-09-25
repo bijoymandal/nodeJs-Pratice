@@ -21,21 +21,21 @@ class UserRepository {
             throw new ApplicationError("Something went Wrong",500);
         }
     }
-    async signIn(email, password) {
-        try{
-          const db = getDB();
-          const collection = db.collection(this.collection);
-          const user = await collection.findOne({email:email,password:password});
-          if(!user){
-            throw new ApplicationError("Invalid email or password",401);
-          }
-          return user;
-        }
-        catch(error)
-        {
-          throw new ApplicationError("Something went Wrong",500);
-        }
-    }
+    // async signIn(email, password) {
+    //     try{
+    //       const db = getDB();
+    //       const collection = db.collection(this.collection);
+    //       const user = await collection.findOne({email:email});
+    //       if(!user){
+    //         throw new ApplicationError("Invalid email or password",401);
+    //       }
+    //       return user;
+    //     }
+    //     catch(error)
+    //     {
+    //       throw new ApplicationError("Something went Wrong",500);
+    //     }
+    // }
     async findByEmail(email) {
       try {
         const db = getDB();

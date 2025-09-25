@@ -6,6 +6,10 @@ import {add,getAll,get} from "../../../feature/product/repository/product.reposi
 export const getAllProducts = async (req, res) => {
   try {
     const products = await getAll();
+    if(!products || products.length===0)
+    {
+        return res.status(404).json({success:false,message:"Products not found",products:[]});
+    }
     return res
       .status(200)
       .json({ success: true, message: "Products fetched successfully", products });
@@ -37,27 +41,31 @@ export const getOneProduct = async (req, res) => {
 
 export const addProduct = async (req, res) => {
   try {
-    const { title, description, price, category, sizes } = req.body;
+    const { title, description, price, category, sizes,image } = req.body;
 
-    if (!title || !description || !price || !category || !req.file?.filename || !sizes) {
-      return res.status(400).json({ message: "All fields are required" });
+    let normalizedSizes = [];
+    if (typeof sizes === "string") {
+      normalizedSizes = sizes.split(",").map(s => s.trim());
+    } else if (Array.isArray(sizes)) {
+      normalizedSizes = sizes;
     }
 
     const newProduct = new ProductModel(
       title,
       description,
       parseFloat(price),
-      req.file.filename,
+      image||"",
       category,
-      sizes.split(",")
+      normalizedSizes
     );
-
+    console.log("newProduct",newProduct);
     await add(newProduct);
 
     return res
       .status(201)
       .json({ message: "Product added successfully", data: newProduct });
   } catch (error) {
+    console.log("error",error);
     return res
       .status(500)
       .json({ message: "Something went wrong, please try again later" });

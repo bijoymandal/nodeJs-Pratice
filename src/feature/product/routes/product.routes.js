@@ -4,26 +4,16 @@ import {getAllProducts,addProduct,rateProductData,filterProducts,getOneProduct} 
 const productRouter = express.Router();
 
 //get routes
-productRouter.get("/", (req,res)=>{
-    ProductController.getAllProducts(req,res);
-});
+productRouter.get("/",getAllProducts);
 
 //post routes
-productRouter.post("/add", (req,res)=>{
-    ProductController.addProduct(req,res)
-});
-productRouter.post("/rate", (req,res)=>{
-    ProductController.rateProductData(req,res)
-});
+productRouter.post("/add", addProduct);
+productRouter.post("/rate", rateProductData);
 
 // product filter 
-productRouter.get('/filter',(req,res)=>{
-    ProductController.filterProducts(req,res)
-});
+productRouter.get('/filter',filterProducts);
 
 //product get product
-productRouter.get("/:id",(req,res)=>{
-    ProductController.getOneProduct(req,res)
-});
+productRouter.get("/:id",getOneProduct);
 
 export default productRouter;

@@ -1,5 +1,5 @@
 import ProductModel from "../model/product.model.js";
-import {add,getAll,get} from "../../../feature/product/repository/product.repository.js";
+import {add,getAll,get,filter,rateProducts} from "../../../feature/product/repository/product.repository.js";
 
 // const productRepo = new ProductRepository();
 
@@ -58,7 +58,6 @@ export const addProduct = async (req, res) => {
       category,
       normalizedSizes
     );
-    console.log("newProduct",newProduct);
     await add(newProduct);
 
     return res
@@ -77,7 +76,7 @@ export const filterProducts = async (req, res) => {
     const { minPrice, maxPrice, category } = req.query;
 
     // Example: Assuming your model has a filter method
-    const result = await ProductModel.filter(minPrice, maxPrice, category);
+    const result = await filter(minPrice, maxPrice, category);
 
     if (!result || result.length === 0) {
       return res.status(404).json({ message: "Products not found" });
@@ -91,14 +90,16 @@ export const filterProducts = async (req, res) => {
 
 export const rateProductData = async (req, res) => {
   try {
-    const { userID, productID, rating } = req.query;
 
-    await ProductModel.rateProducts(userID, productID, rating);
+    const { productID, rating } = req.query;
+    console.log("userID, productID, rating",req.user.userID, productID, rating);
+
+    await rateProducts(req.user.userID, productID, rating);
 
     return res.status(200).json({
       success: true,
       message: "Product rated successfully",
-      product: await productRepo.get(productID),
+      product: await get(productID),
     });
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });

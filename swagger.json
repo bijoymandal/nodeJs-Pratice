@@ -331,6 +331,47 @@
                 }
             }
         },
+        "/api/product/rate": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Rate a product",
+                "description": "Rate a product by providing userID, productID, and rating in query parameters",
+                "parameters": [
+                    {
+                        "name": "productID",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "description": "ID of the product"
+                    },
+                    {
+                        "name": "rating",
+                        "in": "query",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Rating value (e.g., 1-5)"
+                    }
+                ],
+                "security": [
+                    {
+                        "JWT": {}
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product rated successfully"
+                    },
+                    "400": {
+                        "description": "Failed to rate product"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
         "/api/cartItems": {
             "get": {
                 "tags": [

@@ -111,6 +111,68 @@
                 }
             }
         },
+        "/api/product/add": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Add Product",
+                "description": "Endpoint to add a new product",
+                "security": [
+                    {
+                        "JWT": {}
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "image": {
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "size": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "price",
+                                    "image",
+                                    "category",
+                                    "size"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product added successfully"
+                    },
+                    "400": {
+                        "description": "Failed to add product"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
         "/api/product": {
             "get": {
                 "tags": [

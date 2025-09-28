@@ -6,6 +6,7 @@ export const setLastVisit = (req, res, next) => {
     "lastVisit",
     new Date().toISOString(),
     { maxAge: 2 * 24 * 60 * 60 * 1000, httpOnly: true },
-    next()
+    // httpOnly = true
   ); // Set cookie for last visit
+  next();  
 };

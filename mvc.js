@@ -94,6 +94,7 @@ server.get("/product/delete-product/:id", productController.deleteProduct);
 // server.get("/signout", userController.handleUserSignOut);
 server.get("/user", userController.userList);
 server.get("/user/register", userController.getAddForm);
+// server.get("/user/profile",);
 
 //logout route
 server.get("/logout",authController.userLogout);

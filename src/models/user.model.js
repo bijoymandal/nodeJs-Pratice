@@ -1,9 +1,9 @@
 export default class UserModel {
-  constructor(_id, _name, _email, _password) {
-    this._id = Number(_id);
-    this._name = _name;
-    this._email = _email;
-    this._password = _password;
+  constructor(id,name, email, password) {
+    this._id = Number(id);
+    this._name = name;
+    this._email = email;
+    this._password = password;
   }
   
   // Initialize lastId as the highest existing ID

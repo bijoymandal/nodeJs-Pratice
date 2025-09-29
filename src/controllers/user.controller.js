@@ -44,9 +44,11 @@ export default class UserController {
   }
 
   userList(req, res) {
+    let users = UserModel.getUser();
     res.render("pages/user/userList", {
       title: "Users list",
       activePage: "user",
+      users:users
     });
   }
 
@@ -59,5 +61,10 @@ export default class UserController {
       errorMessage: null,
     });
   }
+
+  getProfile(req,res){
+
+  }
+
 
 }

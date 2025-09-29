@@ -6,7 +6,7 @@
       </path>
     </svg>
   </a>
-  <div class="lg:hidden">
+  <div class="hidden lg:flex" id="guest-buttons">
     <button class="navbar-burger flex items-center text-blue-600 p-3">
       <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <title>Mobile menu</title>
@@ -14,49 +14,50 @@
       </svg>
     </button>
   </div>
-  <!-- <ul
-    class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-    <li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">Home</a></li>
-    <li class="text-gray-300">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
-        viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-      </svg>
-    </li>
-    <li><a class="text-sm text-blue-600 font-bold" href="#">About Us</a></li>
-    <li class="text-gray-300">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
-        viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-      </svg>
-    </li>
-    <li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">Services</a></li>
-    <li class="text-gray-300">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
-        viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-      </svg>
-    </li>
-    <li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">Pricing</a></li>
-    <li class="text-gray-300">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
-        viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-      </svg>
-    </li>
-    <li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">Contact</a></li>
-  </ul> -->
-  <button
-    class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-    onclick="openSignInModal()">Sign In</button>
-  <button
-    class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-    onclick="openSignUpModal()">Sign
-    up</button>
+  <%if(user){%>
+    <div id="user-menu" class="hidden relative lg:flex items-center gap-3">
+      <div class="relative inline-block text-left">
+        <!-- Profile button -->
+        <button id="profileMenuButton"
+          class="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none">
+          <img src="<%= user.photo || '/images/default.png' %>" class="w-8 h-8 rounded-full border border-gray-300"
+            alt="User Photo">
+          <span class="font-medium text-gray-700">
+            <%= user.name %>
+          </span>
+          <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div id="profileMenuDropdown"
+          class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+          <a href="/logout" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
+        </div>
+      </div>
+
+      <script>
+        // Simple dropdown toggle
+        document.addEventListener("DOMContentLoaded", () => {
+          const btn = document.getElementById("profileMenuButton");
+          const dropdown = document.getElementById("profileMenuDropdown");
+
+          btn.addEventListener("click", () => {
+            dropdown.classList.toggle("hidden");
+          });
+
+          // Optional: click outside to close
+          document.addEventListener("click", (e) => {
+            if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+              dropdown.classList.add("hidden");
+            }
+          });
+        });
+      </script>
+    </div>
+    <%}%>
 </nav>
 <div class="navbar-menu relative z-50 hidden">
   <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -154,5 +155,6 @@
         });
       }
     }
+
   });
 </script>

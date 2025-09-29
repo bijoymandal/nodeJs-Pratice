@@ -10,13 +10,14 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import { setLastVisit } from "./src/middleware/lastVisit.middleware.js";
 import DashboardController from "./src/controllers/dashboard.controller.js";
+import {authMiddleware} from "./src/middleware/auth.middleware.js";
+import AuthController from "./src/controllers/auth.controller.js";
 
 // Fix __dirname in ES Module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const server = express();
-
 // Middleware
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
@@ -45,6 +46,7 @@ server.use(ejsLayouts);
 server.set("layout", "layouts/main");
 
 // Instantiate Controller
+const authController = new AuthController();
 const productController = new ProductController();
 const userController = new UserController();
 const dashboardController = new DashboardController();
@@ -53,15 +55,26 @@ const dashboardController = new DashboardController();
 /* server.get("/", (req, res) => {
   res.redirect("/product"); // Redirect root to product list
 });*/
+
 //dashboard
 server.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
   res.locals.activePage = req.path; // Set active page for navigation highlighting
   next();
 });
-server.get("/dashboard", dashboardController.getDashboard);
+
+//users
+server.get("/",authController.getAuth);
+server.get("/signup",authController.getSignUpAuth);
+server.post("/signup", userController.handleUserSignUp);
+server.post("/signin", userController.handleUserSignIn);
+
+//🔹 Protect all routes below with authMiddleware
+server.use(authMiddleware); 
+server.get("/dashboard",dashboardController.getDashboard);
 
 //products
-server.get("/product", productController.getProducts);
+server.get("/product",productController.getProducts);
 server.post("/product/search", productController.searchProducts);
 server.get("/product/new-product", productController.getAddForm);
 server.post(
@@ -76,12 +89,15 @@ server.get(
 );
 server.get("/product/delete-product/:id", productController.deleteProduct);
 
-//users
 
+// server.get("/signout", userController.handleUserSignOut);
 server.get("/user", userController.userList);
 server.get("/user/register", userController.getAddForm);
 
+//logout route
+// server.get("/logout",)
+
 // Start server
-server.listen(3400, () => {
-  console.log("Server is running on http://localhost:3400");
+server.listen(3200, () => {
+  console.log("Server is running on http://localhost:3200");
 });

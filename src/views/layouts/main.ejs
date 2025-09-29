@@ -33,38 +33,84 @@
           }
           function openSignInModal() {
             const formHTML = `
-    <h2 class="text-xl font-semibold mb-4">Sign In</h2>
-    <form action="/signup" method="POST" class="space-y-4">
-      <label class="block text-sm font-medium text-gray-700">Name</label>
-      <input name="name" required placeholder="Name" class="w-full p-2 border rounded" />
-      <label class="block text-sm font-medium text-gray-700">Email</label>
-      <input name="email" type="email" required placeholder="Email" class="w-full p-2 border rounded" />
-      <div class="flex justify-end gap-2">
-        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded bg-red-300 text-white">Cancel</button>
-        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Submit</button>
-      </div>
-    </form>
-  `;
+                <h2 class="text-xl font-semibold mb-4">Sign In</h2>
+                <form action="/signup" method="POST" class="space-y-4" id="signInForm">
+                  <label class="block text-sm font-medium text-gray-700">Email</label>
+                  <input name="email" type="text" placeholder="Email" class="w-full p-2 border rounded" />
+                  <label class="block text-sm font-medium text-gray-700">Password</label>
+                  <input name="password" type="password" placeholder="password" class="w-full p-2 border rounded" />
+                  <div id="signInMessage" class="text-sm mt-2"></div>
+                  <div class="flex justify-end gap-2">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded bg-red-300 text-white">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Submit</button>
+                  </div>
+                </form>
+              `;
             openModal(formHTML);
+            attachFormHandler("signInForm", "/signin", "signInMessage");
           }
           function openSignUpModal() {
             const formHTML = `
-    <h2 class="text-xl font-semibold mb-4">Sign Up</h2>
-    <form action="/signup" method="POST" class="space-y-4">
-      <label class="block text-sm font-medium text-gray-700">Name</label>
-      <input name="name" required placeholder="Name" class="w-full p-2 border rounded" />
-      <label class="block text-sm font-medium text-gray-700">Email</label>
-      <input name="email" type="email" required placeholder="Email" class="w-full p-2 border rounded" />
-      <label class="block text-sm font-medium text-gray-700">Password</label>
-      <input name="password" type="password" required placeholder="Password" class="w-full p-2 border rounded" />
-      <div class="flex justify-end gap-2">
-        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-red-300 text-white rounded ">Cancel</button>
-        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Submit</button>
-      </div>
-    </form>
-  `;
+                <h2 class="text-xl font-semibold mb-4">Sign Up</h2>
+                <form action="/signup" method="POST" class="space-y-4" id="signUpForm">
+                  <label class="block text-sm font-medium text-gray-700">Name</label>
+                  <input name="name" placeholder="Name" class="w-full p-2 border rounded" />
+                  <label class="block text-sm font-medium text-gray-700">Email</label>
+                  <input name="email" type="email" required placeholder="Email" class="w-full p-2 border rounded" />
+                  <label class="block text-sm font-medium text-gray-700">Password</label>
+                  <input name="password" type="password" required placeholder="Password" class="w-full p-2 border rounded" />
+                  <div id="signUpMessage" class="text-sm mt-2"></div>
+                  <div class="flex justify-end gap-2">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-red-300 text-white rounded ">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Submit</button>
+                  </div>
+                </form>
+              `;
             openModal(formHTML);
+            attachFormHandler("signUpForm", "/signup", "signUpMessage");
           }
+
+          function attachFormHandler(formId, actionUrl, messageId) {
+            const form = document.getElementById(formId);
+            form.addEventListener("submit", async (e) => {
+              e.preventDefault();
+              const formData = new FormData(form);
+              const data = Object.fromEntries(formData.entries());
+              try {
+                const response = await fetch(actionUrl, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+                console.log(result);
+                const msgBox = document.getElementById(messageId);
+                if (result.success) {
+                  msgBox.innerText = result.message;
+                  msgBox.classList.remove("text-red-600");
+                  msgBox.classList.add("text-green-600");
+                  setTimeout(() => {
+                    closeModal();
+                  }, 1500);
+
+                }
+                else {
+                  msgBox.innerText = result.message || "Submission failed. Please try again.";
+                  msgBox.classList.remove("text-green-600");
+                  msgBox.classList.add("text-red-600");
+                }
+                if (response.ok) {
+                  form.reset();
+                }
+              } catch (error) {
+                document.getElementById(messageId).innerText = "An error occurred. Please try again.";
+              }
+            });
+          }
+
         </script>
 </body>
 

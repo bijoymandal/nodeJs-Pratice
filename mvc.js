@@ -10,8 +10,9 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import { setLastVisit } from "./src/middleware/lastVisit.middleware.js";
 import DashboardController from "./src/controllers/dashboard.controller.js";
-import {authMiddleware} from "./src/middleware/auth.middleware.js";
-import AuthController from "./src/controllers/auth.controller.js";
+import {authMiddleware} from "./src/middleware/auth.middleware.js"; // user express-session session checking 
+import AuthController from "./src/controllers/auth.controller.js"; // 
+import {guestMiddleware} from "./src/middleware/guest.middleware.js"; // user already login or not checkoung only one user access only one browser
 
 // Fix __dirname in ES Module
 const __filename = fileURLToPath(import.meta.url);
@@ -64,10 +65,10 @@ server.use((req, res, next) => {
 });
 
 //users
-server.get("/",authController.getAuth);
-server.get("/signup",authController.getSignUpAuth);
-server.post("/signup", userController.handleUserSignUp);
-server.post("/signin", userController.handleUserSignIn);
+server.get("/",guestMiddleware,authController.getAuth);
+server.get("/signup",guestMiddleware,authController.getSignUpAuth);
+server.post("/signup", guestMiddleware,userController.handleUserSignUp);
+server.post("/signin", guestMiddleware,userController.handleUserSignIn);
 
 //🔹 Protect all routes below with authMiddleware
 server.use(authMiddleware); 
@@ -95,7 +96,7 @@ server.get("/user", userController.userList);
 server.get("/user/register", userController.getAddForm);
 
 //logout route
-// server.get("/logout",)
+server.get("/logout",authController.userLogout);
 
 // Start server
 server.listen(3200, () => {

@@ -12,13 +12,14 @@ export default class AuthController {
         });
     }
     userLogout(req,res){
-        res.session.destroy((err)=>{
+        req.session.destroy((err)=>{
             if(err)
             {
                 console.log("session destroy error:",err);
                 return res.redirect("/dashboard");
             }
-            res.clearCook
+            res.clearCookie("connect.sid");
+            res.redirect("/");
         });
     }
 }

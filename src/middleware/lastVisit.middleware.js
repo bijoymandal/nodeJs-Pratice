@@ -8,5 +8,6 @@ export const setLastVisit = (req, res, next) => {
     { maxAge: 2 * 24 * 60 * 60 * 1000, httpOnly: true },
     // httpOnly = true
   ); // Set cookie for last visit
+  //Continue to next middleware or route handler
   next();  
 };

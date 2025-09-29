@@ -1,11 +1,28 @@
-export class UserModel {
+export default class UserModel {
   constructor(_id, _name, _email, _password) {
-    this._id = _id;
+    this._id = Number(_id);
     this._name = _name;
     this._email = _email;
     this._password = _password;
   }
+  
+  // Initialize lastId as the highest existing ID
   static getUser() {
     return users;
   }
+  static createUser(name,email,password){ 
+    const lastId = users.length > 0 ? Math.max(...users.map(u => u._id)) : 0;
+    const newUser = new UserModel(lastId+1,name,email,password);
+    users.push(newUser);
+    return newUser;
+  }
+
+  static findEmail(email,password){
+    return users.find((user) => user._email == email && user._password == password);
+  }
 }
+
+let users = [
+  new UserModel(1, "John Doe", "johndoe@example.com","password123"),
+  new UserModel(2, "Bijoy", "bijoy@example.com","password")
+];

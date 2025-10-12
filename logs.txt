@@ -58,3 +58,99 @@
 {"level":"info","message":"/api/users/signup - {\"name\":\"seller12\",\"email\":\"seller12@example.com\",\"password\":\"seller@12\",\"type\":\"seller\"}","service":"request-logging"}
 {"level":"info","message":"/api/users/signIn - {\"email\":\"seller12@example.com\",\"password\":\"seller12\"}","service":"request-logging"}
 {"level":"info","message":"/api/users/signIn - {\"email\":\"seller12@example.com\",\"password\":\"seller@12\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signup - {\"name\":\"seller22\",\"email\":\"seller22@example.com\",\"password\":\"seller22@\",\"type\":\"seller\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/product - undefined","service":"request-logging"}
+{"level":"info","message":"/api/product - undefined","service":"request-logging"}
+{"level":"info","message":"/api/product - undefined","service":"request-logging"}
+{"level":"info","message":"/api/product - undefined","service":"request-logging"}
+{"level":"info","message":"/api/product - undefined","service":"request-logging"}
+{"level":"info","message":"/api/product - undefined","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn - {\"email\":\"seller22@example.com\",\"password\":\"seller22@\"}","service":"request-logging"}
+{"level":"info","message":"/api/product - undefined","service":"request-logging"}
+{"level":"info","message":"/api/product - undefined","service":"request-logging"}
+{"level":"info","message":"/ - undefined","service":"request-logging"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:38:24.249Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:38:24.257Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:42:58.602Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:42:58.612Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:46:17.386Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:46:17.394Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:48:20.228Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:48:20.236Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:51:22.429Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-24T18:51:22.436Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100.34,"size":"S","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-24T19:32:49.691Z"}
+{"level":"info","message":{"body":{"email":"seller22@example.com","password":"seller22@"},"method":"POST","url":"/api/users/signIn"},"service":"request-logging","timestamp":"2025-09-24T19:33:11.996Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100.34,"size":"S","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-24T19:33:27.868Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100.34,"size":"S","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-24T19:33:27.875Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100.34,"size":"S","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:46:46.027Z"}
+{"level":"info","message":{"body":{"email":"seller22@example.com","password":"seller22@"},"method":"POST","url":"/api/users/signIn"},"service":"request-logging","timestamp":"2025-09-25T03:47:24.508Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:48:56.321Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:48:56.322Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:49:36.067Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:49:36.074Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:51:26.952Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:51:26.958Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:52:34.044Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:52:34.050Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:54:33.736Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:54:33.743Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:57:32.547Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"size":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T03:57:32.556Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"sizes":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T05:48:17.851Z"}
+{"level":"info","message":{"body":{"email":"seller22@example.com","password":"seller22@"},"method":"POST","url":"/api/users/signIn"},"service":"request-logging","timestamp":"2025-09-25T05:48:24.984Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"sizes":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T05:48:39.328Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Comfortable cotton t-shirt","image":"https://example.com/tshirt.jpg","price":100,"sizes":"S,M","title":"T-Shirt"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T05:48:39.332Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-25T05:56:07.772Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product"},"service":"request-logging","timestamp":"2025-09-25T05:56:07.779Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product/filter?maxPrice=30"},"service":"request-logging","timestamp":"2025-09-25T06:10:57.878Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product/filter?maxPrice=30"},"service":"request-logging","timestamp":"2025-09-25T06:10:57.885Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product/filter?maxPrice=30"},"service":"request-logging","timestamp":"2025-09-25T06:11:31.597Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product/filter?maxPrice=30"},"service":"request-logging","timestamp":"2025-09-25T06:11:31.606Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product/filter?maxPrice=100"},"service":"request-logging","timestamp":"2025-09-25T06:11:38.135Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product/filter?maxPrice=100"},"service":"request-logging","timestamp":"2025-09-25T06:11:38.136Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Stylish blue jeans","image":"https://example.com/jeans.jpg","price":200,"sizes":"30,24,32","title":"Jeans"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T06:13:05.003Z"}
+{"level":"info","message":{"body":{"category":"Clothing","description":"Stylish blue jeans","image":"https://example.com/jeans.jpg","price":200,"sizes":"30,24,32","title":"Jeans"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T06:13:05.004Z"}
+{"level":"info","message":{"body":{"category":"Footwear","description":"Running sneakers","image":"https://example.com/sneaker.jpg","price":200.45,"sizes":"8,9,7","title":"Sneakers"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T06:14:03.175Z"}
+{"level":"info","message":{"body":{"category":"Footwear","description":"Running sneakers","image":"https://example.com/sneaker.jpg","price":200.45,"sizes":"8,9,7","title":"Sneakers"},"method":"POST","url":"/api/product/add"},"service":"request-logging","timestamp":"2025-09-25T06:14:03.176Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product/filter?category=Footwear"},"service":"request-logging","timestamp":"2025-09-25T06:14:22.405Z"}
+{"level":"info","message":{"method":"GET","url":"/api/product/filter?category=Footwear"},"service":"request-logging","timestamp":"2025-09-25T06:14:22.407Z"}
+{"level":"info","message":{"body":{"email":"seller22@example.com","password":"seller22@"},"method":"POST","url":"/api/users/signIn"},"service":"request-logging","timestamp":"2025-09-25T06:21:16.294Z"}
+{"level":"info","message":{"body":{"email":"seller22@example.com","password":"seller22@"},"method":"POST","url":"/api/users/signIn"},"service":"request-logging","timestamp":"2025-09-25T06:29:45.170Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:30:27.952Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:30:27.955Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:32:33.383Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:32:33.392Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:34:16.364Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:34:16.373Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:34:54.692Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:34:54.699Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:35:19.979Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=2"},"service":"request-logging","timestamp":"2025-09-25T06:35:19.988Z"}
+{"level":"info","message":{"body":{"email":"seller22@example.com","password":"seller22@"},"method":"POST","url":"/api/users/signIn"},"service":"request-logging","timestamp":"2025-09-25T06:36:43.510Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=3"},"service":"request-logging","timestamp":"2025-09-25T06:37:11.260Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=3"},"service":"request-logging","timestamp":"2025-09-25T06:37:11.263Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=3.3"},"service":"request-logging","timestamp":"2025-09-25T06:37:28.471Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=3.3"},"service":"request-logging","timestamp":"2025-09-25T06:37:28.472Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=3.3"},"service":"request-logging","timestamp":"2025-09-25T06:40:04.097Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=3.3"},"service":"request-logging","timestamp":"2025-09-25T06:40:04.105Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=6"},"service":"request-logging","timestamp":"2025-09-25T06:40:11.983Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=6"},"service":"request-logging","timestamp":"2025-09-25T06:40:11.988Z"}
+{"level":"info","message":{"body":{"email":"seller22@example.com","password":"seller22@"},"method":"POST","url":"/api/users/signIn"},"service":"request-logging","timestamp":"2025-09-25T06:40:33.966Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4ddab91990db817bb8025&rating=4.3"},"service":"request-logging","timestamp":"2025-09-25T06:41:01.596Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4ddab91990db817bb8025&rating=4.3"},"service":"request-logging","timestamp":"2025-09-25T06:41:01.597Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=4.3"},"service":"request-logging","timestamp":"2025-09-25T06:41:42.650Z"}
+{"level":"info","message":{"method":"POST","url":"/api/product/rate?productID=68d4dd7191990db817bb8024&rating=4.3"},"service":"request-logging","timestamp":"2025-09-25T06:41:42.651Z"}

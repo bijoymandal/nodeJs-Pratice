@@ -46,6 +46,18 @@ export class UserModel {
   {
     return users;
   }
+  static findByEmail(email)
+  {
+    const user = users.find(u=>u.email===email);
+    return user || null;
+  }
+  static async getById(id)
+  {
+
+    const user = users.find(u=>u.id === id);
+    return user || null;
+    
+  }
 }
 
 var users = [

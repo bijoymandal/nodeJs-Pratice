@@ -77,10 +77,10 @@ server.use(loggerMiddleware);
 server.use("/api/product",jwtAuth,loggerMiddleware,productRouter);
 server.use("/api/users" ,userRouter);
 server.use('/api/cartItems',jwtAuth,cartItemsRouter);
+const PORT = 3400;
 
-
-server.listen(3200,()=>{
-  console.log("server is running at 3200");
+server.listen(PORT,()=>{
+  console.log(`server is running at ${PORT}`);
   connectToMongoDB();
 });
 

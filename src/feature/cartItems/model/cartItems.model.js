@@ -8,6 +8,7 @@ export default class CartItemsModel {
 
     static add(productID,userID, quantity) {
 
+        console.log(userID);
         const existingItem = cartItems.find(
             (item) => item.productID == Number(productID) && item.userID == Number(userID)
         );

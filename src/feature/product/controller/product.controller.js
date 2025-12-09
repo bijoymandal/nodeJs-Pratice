@@ -114,5 +114,15 @@ export default function productController(){
       return res.status(500).json({success:false,message:error.message});
     }
   }
-  return {getAllProducts,getOneProduct,addProduct,filterProducts,rateProductData,averagePrice};
+  const groupExpensesBySizes = async(req,res) =>{
+    try{
+      const result = this.ProductRepository.groupExpensesByTags();
+      return res.status(200).json(result);
+    }
+    catch(error)
+    {
+      return res.status(500).json(error);
+    }
+  }
+  return {getAllProducts,getOneProduct,addProduct,filterProducts,rateProductData,averagePrice,groupExpensesBySizes};
 }

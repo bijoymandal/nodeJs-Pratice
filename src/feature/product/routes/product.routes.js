@@ -19,6 +19,8 @@ productRouter.get('/filter',ProductController.filterProducts);
 //product averagePrice
 productRouter.get("/averagePrice",ProductController.averagePrice);
 
+//product expenses by sizes
+productRouter.get('/sizes/by-sizes',ProductController.groupExpensesBySizes);
 //product get product
 productRouter.get("/:id",ProductController.getOneProduct);
 

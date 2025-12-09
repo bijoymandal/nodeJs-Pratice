@@ -117,5 +117,28 @@ export default function productRepository(){
       throw new ApplicationError("something went Wrong",500);
     }
   }
-  return {add,getAll,get,filter,rateProducts,averageProductPricePerCategory};
+  const groupExpensesByTags= async()=>{
+    try{
+      const db = getDB();
+      return await db.collection(this.collection)
+        .aggregate([
+          {$unwind:"$sizes"},
+          {
+            $group:{
+              _id:"$sizes",
+              product:{ //collection name each field 
+                $push:{
+                  title:"$title"
+                }
+              }
+            }
+          }
+        ]).toArray();
+    }
+    catch(error){
+      console.log(error);
+      throw new ApplicationError("Something went wrong",500);
+    }
+  }
+  return {add,getAll,get,filter,rateProducts,averageProductPricePerCategory,groupExpensesByTags};
 }

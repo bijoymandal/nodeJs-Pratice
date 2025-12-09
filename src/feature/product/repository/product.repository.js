@@ -4,40 +4,45 @@ import { ApplicationError } from "../../../error-handler/applicationError.js";
 
 const COLLECTION = "products";
 
-export async function add(newProduct) {
-  try {
+
+export default function productRepository(){
+
+  this.collection = "products";
+
+  const add = async (newProduct)=>{
+    try {
     const db = getDB();
-    await db.collection(COLLECTION).insertOne(newProduct);
+    await db.collection(this.collection).insertOne(newProduct);
     return newProduct;
-  } catch (error) {
-    console.error(error);
-    throw new ApplicationError("Something went wrong", 500);
+    } catch (error) {
+      console.error(error);
+      throw new ApplicationError("Something went wrong", 500);
+    }
   }
-}
 
-export async function getAll() {
-  try {
-    const db = getDB();
-    const products = await db.collection(COLLECTION).find({}).toArray();
-    return products;
-  } catch (error) {
-    console.error(error);
-    throw new ApplicationError("Something went wrong", 500);
+  const getAll = async()=>{
+    try {
+      const db = getDB();
+      const products = await db.collection(this.collection).find({}).toArray();
+      return products;
+    } catch (error) {
+      console.error(error);
+      throw new ApplicationError("Something went wrong", 500);
+    }
   }
-}
 
-export async function get(id) {
-  try {
+
+  const get = async(id)=>{
+    try {
     const db = getDB();
-    const product = await db.collection(COLLECTION).findOne({ _id: new ObjectId(id) });
+    const product = await db.collection(this.collection).findOne({ _id: new ObjectId(id) });
     return product;
-  } catch (error) {
-    console.error(error);
-    throw new ApplicationError("Something went wrong", 500);
+    } catch (error) {
+      console.error(error);
+      throw new ApplicationError("Something went wrong", 500);
+    }
   }
-}
-
-export async function filter(minPrice, maxPrice, category) {
+  const filter = async(minPrice,maxPrice,category)=>{
     try {
         const db = getDB();
         const query = {};
@@ -50,20 +55,20 @@ export async function filter(minPrice, maxPrice, category) {
         if (category) {
             query.category = category;
         }
-        const products = await db.collection(COLLECTION).find(query).toArray();
+        const products = await db.collection(this.collection).find(query).toArray();
         return products;
     }
     catch (error) {
         console.error(error);
         throw new ApplicationError("Something went wrong", 500);
     }
-}
+  }
 
-export async function rateProducts(userID, productID, rating) {
+  const rateProducts = async(userID, productID, rating)=>{
     try {
         const db = getDB();
         //1. validate user and product
-        const product = await db.collection(COLLECTION).findOne({ _id: new ObjectId(productID) });
+        const product = await db.collection(this.collection).findOne({ _id: new ObjectId(productID) });
         if (!product) {
             throw new ApplicationError("Product not found", 404);
         }
@@ -91,4 +96,26 @@ export async function rateProducts(userID, productID, rating) {
         console.error(error);
         throw new ApplicationError("Something went wrong", 500);
     }
+  }
+  const averageProductPricePerCategory = async ()=>{
+
+    try{
+      const db = getDB();
+      return await db.collection(this.collection)
+            .aggregate([
+              {
+                //stage 1:Get average price Per category
+                $group:{
+                  _id:"$category",
+                  averagePrice:{$avg:"$price"}
+                }
+              }
+            ]).toArray();
+    }
+    catch(error){
+      console.log(error);
+      throw new ApplicationError("something went Wrong",500);
+    }
+  }
+  return {add,getAll,get,filter,rateProducts,averageProductPricePerCategory};
 }

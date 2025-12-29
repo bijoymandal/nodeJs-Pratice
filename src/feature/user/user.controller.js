@@ -30,17 +30,18 @@ export class UserController {
   async signIn(req, res) {
     const {email,password} = req.body;
     
-    const userEmail = await UserModel.findByEmail(email);
+    const userEmail = await this.userRepository.findByEmail(email);
+    // console.log("user email error",userEmail);
     
     if(!userEmail){
       return res.status(400).json({ message: "Invalid email or password" });
     } 
     else{
-      // const isPasswordValid = await bcrypyt.compare(password, userEmail.password);
-      const isPasswordValid = await (userEmail.password === password);
+      const isPasswordValid = await bcrypyt.compare(password, userEmail.password);
+      // const isPasswordValid = await (userEmail.password == password);
       if(isPasswordValid){
         //1. create token 
-        const token = jwt.sign({userID:userEmail.id.toString(),email:userEmail.email},process.env.JWT_SECRET,{expiresIn:"1h"});
+        const token = jwt.sign({userID:userEmail._id.toString(),email:userEmail.email},process.env.JWT_SECRET,{expiresIn:"1h"});
         //2. send token to client
         return res.status(200).send(token);
         //access token  likesco

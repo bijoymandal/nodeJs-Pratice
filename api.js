@@ -17,6 +17,7 @@ import productRouter from "./src/feature/product/routes/product.routes.js";
 import cartItemsRouter from "./src/feature/cartItems/routes/cartItems.route.js";
 import loggerMiddleware from "./src/middleware/logger.middleware.js";
 import { ApplicationError } from "./src/error-handler/applicationError.js";
+import orderRouter from "./src/feature/order/order.routes.js";
 
 const apiDocs = JSON.parse(
   fs.readFileSync(new URL("./swagger.json", import.meta.url), "utf-8")
@@ -77,6 +78,7 @@ server.use(loggerMiddleware);
 server.use("/api/product",jwtAuth,loggerMiddleware,productRouter);
 server.use("/api/users" ,userRouter);
 server.use('/api/cartItems',jwtAuth,cartItemsRouter);
+server.use('/api/orders',jwtAuth,orderRouter);
 const PORT = 3400;
 
 server.listen(PORT,()=>{

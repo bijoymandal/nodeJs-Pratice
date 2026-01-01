@@ -5,10 +5,16 @@ export const connectToMongoDB = ()=>{
         .then(clientInstance=>{
             client = clientInstance   
             console.log("Mongodb is connect");
+            // createCounter(client.db());
+            createIndexes(client.db());
         })
         .catch(err=>{
             console.log(err);
         })
+}
+
+export const getClient=()=>{
+    return client;
 }
 
 export const getDB= ()=>{

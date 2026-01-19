@@ -18,6 +18,7 @@ import cartItemsRouter from "./src/feature/cartItems/routes/cartItems.route.js";
 import loggerMiddleware from "./src/middleware/logger.middleware.js";
 import { ApplicationError } from "./src/error-handler/applicationError.js";
 import orderRouter from "./src/feature/order/order.routes.js";
+import { connectUsingMongoose } from "./src/config/mongoose.js";
 
 const apiDocs = JSON.parse(
   fs.readFileSync(new URL("./swagger.json", import.meta.url), "utf-8")
@@ -83,7 +84,8 @@ const PORT = 3400;
 
 server.listen(PORT,()=>{
   console.log(`server is running at ${PORT}`);
-  connectToMongoDB();
+  // connectToMongoDB();
+  connectUsingMongoose();
 });
 
 

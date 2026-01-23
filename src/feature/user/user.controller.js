@@ -25,8 +25,6 @@ export class UserController {
       res.status(400).json({ error: error.message,"message": "User registration failed" });
     }
   }
-
-
   async signIn(req, res) {
     const {email,password} = req.body;
     
@@ -53,24 +51,36 @@ export class UserController {
       }
     }
   }
-  getUserProfile(req, res) {
+  async getUserProfile(req, res) {
     console.log(req);
     const userId = req.params.id; // Assuming user ID is passed as a URL parameter
-    const user = UserModel.getById(userId); // Implement getById method in UserModel
+    const user = await UserModel.getById(userId); // Implement getById method in UserModel
     if (user) {
       res.status(200).json({ user });
     } else {
       res.status(404).json({ error: "User not found" });
     }
   }
-  updateUserProfile(req, res) {
+  async updateUserProfile(req, res) {
     const userId = req.params.id; // Assuming user ID is passed as a URL parameter
     const { name, email, password } = req.body;
     try {
-      UserModel.update(userId, { name, email, password }); // Implement update method in UserModel
+      await UserModel.update(userId, { name, email, password }); // Implement update method in UserModel
       res.status(200).json({ message: "User profile updated successfully" });
     } catch (error) {
       res.status(400).json({ error: error.message });
+    }
+  }
+  async resetPassword(req,res){
+    const {newPassword} = req.body;
+    const userID = req.params.id;
+    const hashedPassword = await bcrypyt.hash(newPassword,12)
+    try{
+      await this.userRepository.updatePassword(userID,hashedPassword);
+      res.status(200).json({message:"Password updated successfully"});
+    }
+    catch(error){
+      return res.status(500).json({message:"Something went wrong"});
     }
   }
 }

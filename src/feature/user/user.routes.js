@@ -13,5 +13,6 @@ userRouter.post("/signin", (req,res)=>{
 });
 userRouter.get("/profile", jwtAuth,userController.getUserProfile);
 userRouter.put("/profile/:id", userController.updateUserProfile);
+userRouter.put("/change-password",jwtAuth,userController.resetPassword);
 
 export default userRouter;

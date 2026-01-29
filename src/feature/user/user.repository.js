@@ -24,8 +24,15 @@ class UserRepository {
         }
         catch(error)
         {
-            console.log(error);
-            throw new ApplicationError("Something went Wrong",500);
+              if(error instanceof mongoose.Error.ValidationError)
+              {
+                    throw error;
+              }
+              else
+              {
+                    console.log(error);
+                        throw new ApplicationError("Something went Wrong",500);
+              }
         }
     }
     // async signIn(email, password) {
